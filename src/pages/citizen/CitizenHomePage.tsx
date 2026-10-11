@@ -153,22 +153,22 @@ export const CitizenHomePage: React.FC = () => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.35, delay: 0.1 }}
       >
-        <div className="relative overflow-hidden rounded-2xl bg-linear-to-r from-blue-900 via-blue-800 to-indigo-900 text-white p-6 sm:p-8 shadow-lg border border-blue-700/50">
+        <div className="relative overflow-hidden rounded-2xl bg-white text-slate-900 p-6 sm:p-8 shadow-sm border border-slate-200/90">
           {/* Subtle background glow effect */}
-          <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-orange-500/15 blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-1/3 -mb-16 w-64 h-64 rounded-full bg-blue-400/20 blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-orange-100/50 blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-1/3 -mb-16 w-64 h-64 rounded-full bg-blue-100/40 blur-3xl pointer-events-none" />
 
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="space-y-2 max-w-xl">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/10 text-orange-300 text-xs font-bold border border-white/10 backdrop-blur-xs">
-                <Sparkles className="w-3.5 h-3.5 text-orange-400" />
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-orange-50 text-orange-700 text-xs font-bold border border-orange-200">
+                <Sparkles className="w-3.5 h-3.5 text-orange-600" />
                 <span>Instant 24/7 AI-Assisted Intake</span>
               </span>
 
-              <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+              <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
                 REPORT A PROBLEM
               </h2>
-              <p className="text-xs sm:text-sm text-blue-100/90 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 Report road damage, water disruption, sanitation, electricity, or municipal issues.
                 Our AI triages and assigns designated government field engineers with guaranteed statutory SLAs.
               </p>

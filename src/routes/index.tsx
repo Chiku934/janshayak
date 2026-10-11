@@ -62,7 +62,7 @@ export const router = createBrowserRouter([
     element: <CitizenConsentPage />,
   },
 
-  // 2. Demo Hub & Design System (Unified Dark Navy Shell)
+  // 2. Demo Hub & Design System (Unified Clean Light Shell)
   {
     path: '/',
     element: <AdminShellLayout />,
@@ -82,7 +82,7 @@ export const router = createBrowserRouter([
     ],
   },
 
-  // 3. Citizen Application (Unified Dark Navy Shell)
+  // 3. Citizen Application (Unified Clean Light Shell)
   {
     path: '/citizen',
     element: <AdminShellLayout />,
@@ -142,7 +142,7 @@ export const router = createBrowserRouter([
     ],
   },
 
-  // 4. Case Manager Application (Unified Dark Navy Shell)
+  // 4. Case Manager Application (Unified Clean Light Shell)
   {
     path: '/case-manager',
     element: <AdminShellLayout />,
@@ -230,7 +230,7 @@ export const router = createBrowserRouter([
     ],
   },
 
-  // 6. Administrator Application (Unified Dark Navy Shell)
+  // 6. Administrator Application (Unified Clean Light Shell)
   {
     path: '/admin',
     element: <AdminShellLayout />,

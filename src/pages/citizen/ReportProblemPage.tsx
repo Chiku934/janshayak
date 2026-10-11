@@ -820,7 +820,7 @@ export const ReportProblemPage: React.FC = () => {
                   <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg border-2 border-white transform -translate-y-2">
                     <MapPin className="w-6 h-6 text-white" />
                   </div>
-                  <div className="bg-slate-900/90 text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-md backdrop-blur-xs flex items-center gap-1 mt-1">
+                  <div className="bg-white/95 text-slate-800 text-[11px] font-bold px-2.5 py-1 rounded-full shadow-md backdrop-blur-xs flex items-center gap-1 mt-1 border border-slate-200">
                     <span>{ward}</span>
                   </div>
                 </div>

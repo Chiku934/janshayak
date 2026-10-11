@@ -53,21 +53,21 @@ export const CaseManagerCommandLayout: React.FC = () => {
       {/* 1. Desktop Command Centre Sidebar */}
       <aside
         className={cn(
-          'fixed inset-y-0 left-0 z-40 w-64 bg-slate-900 text-white flex flex-col justify-between border-r border-slate-800 transition-transform duration-300 lg:translate-x-0 lg:static',
+          'fixed inset-y-0 left-0 z-40 w-64 bg-white text-slate-800 flex flex-col justify-between border-r border-slate-200/90 shadow-2xs transition-transform duration-300 lg:translate-x-0 lg:static',
           isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
         {/* Sidebar Brand Header */}
         <div>
-          <div className="p-5 border-b border-slate-800 flex items-center justify-between">
+          <div className="p-5 border-b border-slate-100 flex items-center justify-between">
             <Link to="/case-manager/dashboard" className="flex items-center gap-3">
-              <GovEmblem size="sm" className="brightness-200 shrink-0" />
+              <GovEmblem size="sm" className="shrink-0" />
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="font-extrabold text-white text-sm tracking-tight">
+                  <span className="font-extrabold text-slate-900 text-sm tracking-tight">
                     JAN SAHAYAK
                   </span>
-                  <span className="text-[9px] font-bold text-orange-400 bg-orange-500/10 px-1.5 py-0.2 rounded border border-orange-400/20">
+                  <span className="text-[9px] font-bold text-orange-600 bg-orange-50 px-1.5 py-0.2 rounded border border-orange-200">
                     OPS
                   </span>
                 </div>
@@ -80,7 +80,7 @@ export const CaseManagerCommandLayout: React.FC = () => {
             <button
               type="button"
               onClick={() => setIsMobileSidebarOpen(false)}
-              className="lg:hidden p-1.5 text-slate-400 hover:text-white rounded-lg"
+              className="lg:hidden p-1.5 text-slate-400 hover:text-slate-700 rounded-lg"
             >
               <X className="w-5 h-5" />
             </button>
@@ -88,7 +88,7 @@ export const CaseManagerCommandLayout: React.FC = () => {
 
           {/* Navigation Links */}
           <nav className="p-3 space-y-1">
-            <div className="px-3 py-2 text-[10px] font-black tracking-wider uppercase text-slate-500">
+            <div className="px-3 py-2 text-[10px] font-bold tracking-wider uppercase text-slate-400">
               Operations Navigation
             </div>
 
@@ -107,15 +107,15 @@ export const CaseManagerCommandLayout: React.FC = () => {
                   className={cn(
                     'flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all group',
                     isActive
-                      ? 'bg-blue-600 text-white shadow-md'
-                      : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
+                      ? 'bg-blue-50 text-blue-700 shadow-2xs border border-blue-200/70'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
                   )}
                 >
                   <div className="flex items-center gap-3">
                     <Icon
                       className={cn(
                         'w-4 h-4 transition-colors',
-                        isActive ? 'text-white' : 'text-slate-400 group-hover:text-white'
+                        isActive ? 'text-blue-600' : 'text-slate-400 group-hover:text-slate-600'
                       )}
                     />
                     <span>{item.label}</span>
@@ -133,27 +133,27 @@ export const CaseManagerCommandLayout: React.FC = () => {
         </div>
 
         {/* Sidebar Footer Officer Status Card */}
-        <div className="p-4 border-t border-slate-800 space-y-3">
-          <div className="p-3 rounded-xl bg-slate-800/80 border border-slate-700/60 space-y-2">
+        <div className="p-4 border-t border-slate-100 space-y-3 bg-slate-50/70">
+          <div className="p-3 rounded-xl bg-white border border-slate-200/80 shadow-2xs space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
                 Active Zone
               </span>
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             </div>
-            <p className="text-xs font-bold text-white leading-tight">
+            <p className="text-xs font-bold text-slate-800 leading-tight">
               Zone 4 / Ward 14 (Shivaji Nagar)
             </p>
-            <p className="text-[10px] text-slate-400">
+            <p className="text-[10px] text-slate-500">
               Assigned SLA Target: 95%+
             </p>
           </div>
 
-          <div className="flex items-center justify-between pt-1 text-[11px] text-slate-400">
-            <Link to="/demo" className="hover:text-white flex items-center gap-1">
+          <div className="flex items-center justify-between pt-1 text-[11px] text-slate-500">
+            <Link to="/demo" className="hover:text-slate-900 flex items-center gap-1">
               <span>Switch Role</span>
             </Link>
-            <Link to="/design-system" className="hover:text-blue-400 flex items-center gap-1">
+            <Link to="/design-system" className="hover:text-blue-600 flex items-center gap-1">
               <span>Design System</span>
             </Link>
           </div>
@@ -163,7 +163,7 @@ export const CaseManagerCommandLayout: React.FC = () => {
       {/* Backdrop for Mobile Sidebar */}
       {isMobileSidebarOpen && (
         <div
-          className="fixed inset-0 z-30 bg-slate-900/60 backdrop-blur-xs lg:hidden"
+          className="fixed inset-0 z-30 bg-slate-900/30 backdrop-blur-xs lg:hidden"
           onClick={() => setIsMobileSidebarOpen(false)}
         />
       )}

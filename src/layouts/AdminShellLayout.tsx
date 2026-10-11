@@ -204,23 +204,23 @@ export const AdminShellLayout: React.FC = () => {
   return (
     <div className="min-h-screen flex bg-[#F4F6FB] text-slate-900 antialiased font-sans">
       {/* ========================================================================= */}
-      {/* 1. DARK NAVY SIDEBAR (Universal Dark Navy Shell) */}
+      {/* 1. CLEAN LIGHT SIDEBAR (Universal Light Government Shell) */}
       {/* ========================================================================= */}
       <aside
         className={cn(
-          'fixed inset-y-0 left-0 z-40 w-64 bg-[#0A1224] text-white flex flex-col justify-between transition-transform duration-200 shrink-0 lg:static',
+          'fixed inset-y-0 left-0 z-40 w-64 bg-white text-slate-800 flex flex-col justify-between border-r border-slate-200/90 shadow-2xs transition-transform duration-200 shrink-0 lg:static',
           isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         )}
       >
         <div className="flex flex-col h-full overflow-hidden">
           {/* Brand Header */}
-          <div className="p-5 pb-4 flex items-center justify-between shrink-0">
+          <div className="p-5 pb-4 flex items-center justify-between shrink-0 border-b border-slate-100">
             <Link
               to={isCitizenView ? '/citizen/home' : isAdminView ? '/admin/dashboard' : '/case-manager/dashboard'}
               className="flex items-center gap-3 overflow-hidden group"
             >
               {/* Saffron Emblem Icon */}
-              <div className="w-9 h-9 rounded-xl bg-orange-500 text-white flex items-center justify-center font-black shrink-0 shadow-md shadow-orange-500/20">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-orange-500 to-amber-500 text-white flex items-center justify-center font-black shrink-0 shadow-xs shadow-orange-500/20">
                 <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
                   <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
                 </svg>
@@ -228,12 +228,12 @@ export const AdminShellLayout: React.FC = () => {
 
               <div>
                 <div className="flex items-center gap-1.5 leading-tight">
-                  <span className="font-bold text-xs text-orange-400">जन सहायक</span>
+                  <span className="font-bold text-xs text-orange-600">जन सहायक</span>
                 </div>
-                <h1 className="font-extrabold text-sm tracking-tight text-white leading-tight">
+                <h1 className="font-extrabold text-sm tracking-tight text-slate-900 leading-tight">
                   Jan Sahayak
                 </h1>
-                <p className="text-[9px] uppercase tracking-wider text-slate-400 font-semibold mt-0.5">
+                <p className="text-[9px] uppercase tracking-wider text-slate-400 font-bold mt-0.5">
                   CIVIC ASSISTANCE PLATFORM
                 </p>
               </div>
@@ -243,18 +243,18 @@ export const AdminShellLayout: React.FC = () => {
             <button
               type="button"
               onClick={() => setIsMobileSidebarOpen(false)}
-              className="lg:hidden p-1.5 text-slate-400 hover:text-white rounded-lg"
+              className="lg:hidden p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Navigation Items List */}
-          <div className="flex-1 overflow-y-auto px-3 py-2 space-y-4 custom-scrollbar">
+          <div className="flex-1 overflow-y-auto px-3 py-3 space-y-4 custom-scrollbar">
             {navSections.map((sec, sIdx) => (
-              <div key={sIdx} className={cn('space-y-0.5', sIdx > 0 && 'pt-2 border-t border-slate-800/80')}>
+              <div key={sIdx} className={cn('space-y-1', sIdx > 0 && 'pt-3 border-t border-slate-100')}>
                 {sec.title && (
-                  <p className="px-3.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+                  <p className="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
                     {sec.title}
                   </p>
                 )}
@@ -272,16 +272,16 @@ export const AdminShellLayout: React.FC = () => {
                       to={item.path}
                       onClick={() => setIsMobileSidebarOpen(false)}
                       className={cn(
-                        'flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-150 group relative',
+                        'flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all duration-150 group relative',
                         isActive
-                          ? 'bg-[#1D68FF] text-white font-bold shadow-sm'
-                          : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                          ? 'bg-blue-50 text-blue-700 font-bold shadow-2xs border border-blue-200/70'
+                          : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
                       )}
                     >
                       <Icon
                         className={cn(
                           'w-4 h-4 shrink-0 transition-colors',
-                          isActive ? 'text-white' : 'text-slate-400 group-hover:text-white'
+                          isActive ? 'text-blue-600' : 'text-slate-400 group-hover:text-slate-600'
                         )}
                       />
                       <span className="truncate">{item.label}</span>
@@ -290,8 +290,10 @@ export const AdminShellLayout: React.FC = () => {
                       {item.badge !== undefined && (
                         <span
                           className={cn(
-                            'ml-auto text-[10px] font-black px-1.5 py-0.2 rounded-full',
-                            item.badgeColor || 'bg-slate-700 text-white'
+                            'ml-auto text-[10px] font-bold px-1.5 py-0.2 rounded-full',
+                            isActive
+                              ? 'bg-blue-600 text-white'
+                              : 'bg-slate-100 text-slate-600 border border-slate-200/60'
                           )}
                         >
                           {item.badge}
@@ -305,21 +307,21 @@ export const AdminShellLayout: React.FC = () => {
           </div>
 
           {/* Bottom Profile Area & Logout */}
-          <div className="p-3 border-t border-slate-800/80 space-y-2 shrink-0 bg-[#080E1C]">
+          <div className="p-3 border-t border-slate-200/80 space-y-2 shrink-0 bg-slate-50/70">
             <button
               type="button"
               onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-              className="w-full flex items-center justify-between p-2 rounded-xl bg-slate-800/50 hover:bg-slate-800 transition-colors text-left cursor-pointer"
+              className="w-full flex items-center justify-between p-2 rounded-xl bg-white hover:bg-slate-100/80 border border-slate-200/80 shadow-2xs transition-colors text-left cursor-pointer"
             >
               <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-8 h-8 rounded-full bg-[#1D68FF] text-white font-bold text-xs flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-2xs">
                   {profileInitials}
                 </div>
                 <div className="min-w-0">
-                  <p className="text-xs font-bold text-white truncate leading-tight">
+                  <p className="text-xs font-bold text-slate-800 truncate leading-tight">
                     {profileName}
                   </p>
-                  <p className="text-[10px] text-slate-400 truncate">
+                  <p className="text-[10px] text-slate-500 truncate font-medium">
                     {profileRole}
                   </p>
                 </div>
@@ -331,7 +333,7 @@ export const AdminShellLayout: React.FC = () => {
             <button
               type="button"
               onClick={handleLogout}
-              className="w-full flex items-center gap-2 px-3 py-1.5 text-xs text-slate-400 hover:text-white transition-colors cursor-pointer"
+              className="w-full flex items-center gap-2 px-3 py-1.5 text-xs text-slate-500 hover:text-slate-800 hover:bg-white rounded-lg transition-colors cursor-pointer"
             >
               <LogOut className="w-3.5 h-3.5" />
               <span>Exit to Demo Hub</span>
@@ -343,7 +345,7 @@ export const AdminShellLayout: React.FC = () => {
       {/* Backdrop for Mobile Sidebar */}
       {isMobileSidebarOpen && (
         <div
-          className="fixed inset-0 z-30 bg-slate-900/60 backdrop-blur-xs lg:hidden"
+          className="fixed inset-0 z-30 bg-slate-900/30 backdrop-blur-xs lg:hidden"
           onClick={() => setIsMobileSidebarOpen(false)}
         />
       )}

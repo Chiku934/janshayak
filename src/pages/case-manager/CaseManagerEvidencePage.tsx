@@ -468,51 +468,51 @@ export const CaseManagerEvidencePage: React.FC = () => {
       {/* ========================================================================= */}
       {/* SECURE EVIDENCE VAULT VISUAL SECTION */}
       {/* ========================================================================= */}
-      <Card className="p-5 sm:p-6 rounded-2xl border border-slate-200 bg-linear-to-r from-slate-900 via-slate-800 to-indigo-950 text-white shadow-md relative overflow-hidden">
+      <Card className="p-5 sm:p-6 rounded-2xl border border-slate-200 bg-linear-to-r from-blue-50/80 via-indigo-50/50 to-sky-50 text-slate-900 shadow-2xs relative overflow-hidden">
         {/* Subtle background glow effect */}
-        <div className="absolute right-0 top-0 -mt-8 -mr-8 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute right-0 top-0 -mt-8 -mr-8 w-64 h-64 bg-blue-100/40 rounded-full blur-3xl pointer-events-none" />
 
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
           <div className="space-y-2 max-w-xl">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold border border-emerald-500/30">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold border border-emerald-200">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
                 DigiLocker & SHA-256 Vault Active
               </span>
-              <span className="text-[11px] text-slate-400 font-mono">
+              <span className="text-[11px] text-slate-500 font-mono">
                 Chain of Custody: Immutable
               </span>
             </div>
 
-            <h2 className="text-lg sm:text-xl font-black text-white tracking-tight">
+            <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
               Secure Evidence Vault & Audit Integrity
             </h2>
 
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-xs text-slate-600 leading-relaxed">
               Every citizen photo, inspection video, audio statement, and PDF is hashed with SHA-256 and stamped with cryptographic location metadata for legal admissibility in municipal tribunal proceedings.
             </p>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 w-full lg:w-auto text-center">
-            <div className="bg-white/10 backdrop-blur-xs p-3 rounded-xl border border-white/10">
-              <span className="text-xl sm:text-2xl font-black text-white">100%</span>
-              <p className="text-[10px] text-slate-300 font-semibold uppercase tracking-wider">
+            <div className="bg-white/90 p-3 rounded-xl border border-blue-100 shadow-2xs">
+              <span className="text-xl sm:text-2xl font-black text-slate-900">100%</span>
+              <p className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">
                 Integrity Sealed
               </p>
             </div>
-            <div className="bg-white/10 backdrop-blur-xs p-3 rounded-xl border border-white/10">
-              <span className="text-xl sm:text-2xl font-black text-emerald-400">
+            <div className="bg-white/90 p-3 rounded-xl border border-blue-100 shadow-2xs">
+              <span className="text-xl sm:text-2xl font-black text-emerald-600">
                 {evidenceList.filter((e) => e.verificationStatus === 'VERIFIED').length}
               </span>
-              <p className="text-[10px] text-slate-300 font-semibold uppercase tracking-wider">
+              <p className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">
                 Verified Files
               </p>
             </div>
-            <div className="bg-white/10 backdrop-blur-xs p-3 rounded-xl border border-white/10 col-span-2 sm:col-span-1">
-              <span className="text-xl sm:text-2xl font-black text-amber-400">
+            <div className="bg-white/90 p-3 rounded-xl border border-blue-100 shadow-2xs col-span-2 sm:col-span-1">
+              <span className="text-xl sm:text-2xl font-black text-amber-600">
                 {evidenceList.filter((e) => e.verificationStatus === 'PENDING').length}
               </span>
-              <p className="text-[10px] text-slate-300 font-semibold uppercase tracking-wider">
+              <p className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">
                 Pending Triage
               </p>
             </div>
@@ -1028,14 +1028,14 @@ export const CaseManagerEvidencePage: React.FC = () => {
               )}
 
               {activePreviewItem.type === 'AUDIO' && (
-                <div className="p-8 text-center bg-slate-900 text-white w-full h-full min-h-[260px] flex flex-col items-center justify-center space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center mx-auto border border-amber-500/30">
+                <div className="p-8 text-center bg-amber-50/60 text-slate-800 w-full h-full min-h-[260px] flex flex-col items-center justify-center space-y-4 border border-amber-200/60 rounded-xl">
+                  <div className="w-16 h-16 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center mx-auto border border-amber-200">
                     <Mic className="w-8 h-8" />
                   </div>
 
                   <div className="space-y-1">
-                    <p className="text-sm font-bold text-white">{activePreviewItem.fileName}</p>
-                    <p className="text-xs text-slate-400">Citizen Audio Voice Statement</p>
+                    <p className="text-sm font-bold text-slate-900">{activePreviewItem.fileName}</p>
+                    <p className="text-xs text-slate-500">Citizen Audio Voice Statement</p>
                   </div>
 
                   <div className="w-full max-w-sm">

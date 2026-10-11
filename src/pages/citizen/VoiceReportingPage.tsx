@@ -243,21 +243,21 @@ export const VoiceReportingPage: React.FC = () => {
   return (
     <div className="max-w-3xl mx-auto space-y-6 pb-12">
       {/* 1. Official Phase 02 Demo Banner */}
-      <div className="bg-linear-to-r from-purple-900 via-indigo-900 to-blue-950 text-white p-4 sm:p-5 rounded-2xl border border-purple-500/30 shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="bg-linear-to-r from-purple-50 via-indigo-50/60 to-blue-50 text-slate-800 p-4 sm:p-5 rounded-2xl border border-purple-200 shadow-2xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-300 border border-purple-400/30 flex items-center justify-center shrink-0">
-            <Radio className="w-5 h-5 animate-pulse text-purple-300" />
+          <div className="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 border border-purple-200 flex items-center justify-center shrink-0">
+            <Radio className="w-5 h-5 animate-pulse text-purple-600" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-black bg-purple-400/20 text-purple-200 px-2.5 py-0.5 rounded-full border border-purple-400/40 uppercase tracking-wider">
+              <span className="text-xs font-bold bg-purple-100 text-purple-800 px-2.5 py-0.5 rounded-full border border-purple-200 uppercase tracking-wider">
                 Demo Capability — Phase 02
               </span>
-              <span className="text-[10px] text-purple-300 hidden sm:inline">
+              <span className="text-[10px] text-purple-700 hidden sm:inline font-semibold">
                 Simulated AI Speech Engine
               </span>
             </div>
-            <p className="text-xs text-purple-200/90 mt-1">
+            <p className="text-xs text-slate-600 mt-1">
               Zero typing required. Speak in regional Indian dialects for automated AI transcription & category classification.
             </p>
           </div>
@@ -268,7 +268,7 @@ export const VoiceReportingPage: React.FC = () => {
           size="sm"
           onClick={() => navigate('/citizen/report')}
           leftIcon={<ArrowLeft className="w-3.5 h-3.5" />}
-          className="bg-white/10 hover:bg-white/20 text-white border-white/20 text-xs shrink-0"
+          className="bg-white hover:bg-slate-50 text-slate-700 border-slate-200 text-xs shrink-0 shadow-2xs"
         >
           Standard Form
         </Button>

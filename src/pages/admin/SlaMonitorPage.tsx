@@ -25,28 +25,28 @@ export const SlaMonitorPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* SLA Sentinel Banner */}
-      <div className="bg-linear-to-r from-rose-900 via-rose-950 to-slate-900 text-white rounded-2xl p-6 shadow-lg border border-rose-800/40">
+      <div className="bg-linear-to-r from-rose-50 via-red-50/60 to-orange-50 text-slate-900 rounded-2xl p-6 shadow-xs border border-rose-200">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="bg-rose-500 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1 animate-pulse">
-                <ShieldAlert className="w-3 h-3" />
+              <span className="bg-rose-100 text-rose-700 border border-rose-200 text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                <ShieldAlert className="w-3 h-3 text-rose-600" />
                 AUTOMATED ESCALATION SENTINEL
               </span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold">
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900">
               District Collectorate SLA Oversight Sentinel
             </h2>
-            <p className="text-xs text-rose-200 max-w-2xl leading-relaxed">
+            <p className="text-xs text-slate-600 max-w-2xl leading-relaxed">
               When grievances breach 24h/48h statutory delivery limits without field resolution, Jan Sahayak automatically routes them directly to the District Collector’s executive action docket.
             </p>
           </div>
 
           <div className="text-right shrink-0">
-            <span className="text-2xl font-black text-rose-300">
+            <span className="text-2xl font-black text-rose-700">
               {escalatedCases.length} Escalations
             </span>
-            <p className="text-[11px] text-rose-200">Requiring Collector Order</p>
+            <p className="text-[11px] text-slate-500 font-medium">Requiring Collector Order</p>
           </div>
         </div>
       </div>

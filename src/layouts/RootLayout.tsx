@@ -280,51 +280,51 @@ export const RootLayout: React.FC = () => {
       <BottomNav />
 
       {/* Official Government Footer */}
-      <footer className="bg-slate-900 text-slate-400 text-xs mt-auto border-t border-slate-800 pb-16 md:pb-0">
+      <footer className="bg-white text-slate-600 text-xs mt-auto border-t border-slate-200 pb-16 md:pb-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pb-6 border-b border-slate-800">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pb-6 border-b border-slate-200">
             <div className="space-y-2">
-              <div className="flex items-center gap-2 text-white font-bold text-sm">
-                <GovEmblem size="sm" className="brightness-200" />
+              <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
+                <GovEmblem size="sm" />
                 <span>JAN SAHAYAK (जन सहायक)</span>
               </div>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[11px] text-slate-500">
                 National Unified Civic Assistance Platform. Powered by AI-driven triage, multi-channel citizen communication & DigiLocker integration.
               </p>
             </div>
 
             <div>
-              <h5 className="text-white font-semibold text-xs mb-2">Design System & Tech</h5>
+              <h5 className="text-slate-900 font-semibold text-xs mb-2">Design System & Tech</h5>
               <ul className="space-y-1.5 text-[11px]">
-                <li><Link to="/design-system" className="text-blue-400 hover:text-blue-300 font-bold">Design System Gallery (20 Parts)</Link></li>
-                <li><Link to="/citizen/new" className="hover:text-white">Voice-First Intake Wizard</Link></li>
-                <li><Link to="/citizen/track" className="hover:text-white">SLA Tracking & Timelines</Link></li>
-                <li><Link to="/citizen/vault" className="hover:text-white">DigiLocker Integration</Link></li>
+                <li><Link to="/design-system" className="text-blue-600 hover:text-blue-700 font-bold">Design System Gallery (20 Parts)</Link></li>
+                <li><Link to="/citizen/report" className="hover:text-slate-900 text-slate-600">Voice-First Intake Wizard</Link></li>
+                <li><Link to="/citizen/cases" className="hover:text-slate-900 text-slate-600">SLA Tracking & Timelines</Link></li>
+                <li><Link to="/citizen/vault" className="hover:text-slate-900 text-slate-600">DigiLocker Integration</Link></li>
               </ul>
             </div>
 
             <div>
-              <h5 className="text-white font-semibold text-xs mb-2">Administrative Portals</h5>
+              <h5 className="text-slate-900 font-semibold text-xs mb-2">Administrative Portals</h5>
               <ul className="space-y-1.5 text-[11px]">
-                <li><Link to="/officer" className="hover:text-white">Field Inspection Desk</Link></li>
-                <li><Link to="/officer/queue" className="hover:text-white">Triage & Work Order Queue</Link></li>
-                <li><Link to="/admin" className="hover:text-white">Collectorate SLA Command Center</Link></li>
-                <li><Link to="/admin/analytics" className="hover:text-white">Department Heatmaps</Link></li>
+                <li><Link to="/case-manager/field-inspection" className="hover:text-slate-900 text-slate-600">Field Inspection Desk</Link></li>
+                <li><Link to="/case-manager/queue" className="hover:text-slate-900 text-slate-600">Triage & Work Order Queue</Link></li>
+                <li><Link to="/admin/dashboard" className="hover:text-slate-900 text-slate-600">Collectorate SLA Command Center</Link></li>
+                <li><Link to="/admin/reports" className="hover:text-slate-900 text-slate-600">Department Heatmaps</Link></li>
               </ul>
             </div>
 
             <div>
-              <h5 className="text-white font-semibold text-xs mb-2">Help & Compliance</h5>
-              <p className="text-[11px] text-slate-400 mb-2">
-                24x7 Toll-Free Civic Helpline: <b>1800-11-2026</b>
+              <h5 className="text-slate-900 font-semibold text-xs mb-2">Help & Compliance</h5>
+              <p className="text-[11px] text-slate-500 mb-2">
+                24x7 Toll-Free Civic Helpline: <b className="text-slate-800">1800-11-2026</b>
               </p>
-              <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-slate-800 text-emerald-400 text-[10px] font-bold">
+              <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold">
                 <span>● 100% Client-Side Prototype Active</span>
               </div>
             </div>
           </div>
 
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-400 gap-2">
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 gap-2">
             <p>© 2026 Government of India / State Administration. Prototype Demonstration.</p>
             <div className="flex gap-4">
               <span>National Informatics Center (NIC) Compliant</span>

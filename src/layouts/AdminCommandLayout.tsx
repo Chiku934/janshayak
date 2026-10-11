@@ -68,27 +68,27 @@ export const AdminCommandLayout: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col antialiased">
       {/* Top Enterprise Header */}
-      <header className="sticky top-0 z-40 bg-slate-900 border-b border-slate-800 text-white shadow-md">
+      <header className="sticky top-0 z-40 bg-white border-b border-slate-200 text-slate-800 shadow-2xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
           {/* Logo & Mobile Menu Toggle */}
           <div className="flex items-center gap-3">
             <button
               onClick={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
-              className="lg:hidden p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              className="lg:hidden p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors"
             >
               {isMobileSidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
 
             <Link to="/admin/dashboard" className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-linear-to-br from-purple-500 to-indigo-600 text-white flex items-center justify-center font-black shadow-sm">
+              <div className="w-8 h-8 rounded-lg bg-linear-to-br from-purple-500 to-indigo-600 text-white flex items-center justify-center font-black shadow-xs">
                 <Shield className="w-4 h-4" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-black text-sm sm:text-base tracking-tight text-white">
+                  <span className="font-black text-sm sm:text-base tracking-tight text-slate-900">
                     JAN SAHAYAK
                   </span>
-                  <span className="text-[10px] uppercase font-black tracking-widest bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded border border-purple-500/30 hidden sm:inline-block">
+                  <span className="text-[10px] uppercase font-bold tracking-widest bg-purple-50 text-purple-700 px-1.5 py-0.5 rounded border border-purple-200 hidden sm:inline-block">
                     Administrator Command Centre
                   </span>
                 </div>
@@ -105,7 +105,7 @@ export const AdminCommandLayout: React.FC = () => {
                 placeholder="Search across cases, departments, officers, or audit logs..."
                 value={globalSearch}
                 onChange={(e) => setGlobalSearch(e.target.value)}
-                className="w-full rounded-xl bg-slate-800/80 border border-slate-700/80 pl-9 pr-4 py-2 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all shadow-inner"
+                className="w-full rounded-xl bg-slate-50 border border-slate-200 pl-9 pr-4 py-2 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all shadow-inner"
               />
             </form>
           </div>
@@ -113,7 +113,7 @@ export const AdminCommandLayout: React.FC = () => {
           {/* Right Profile & Quick Stats */}
           <div className="flex items-center gap-3">
             {/* System Status Pill */}
-            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-950/60 border border-emerald-800/60 text-emerald-400 text-[11px] font-bold">
+            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-bold">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span>Engine Active (99.98% SLA)</span>
             </div>
@@ -121,12 +121,12 @@ export const AdminCommandLayout: React.FC = () => {
             {/* Notification Bell */}
             <Link
               to="/citizen/notifications"
-              className="relative p-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors"
+              className="relative p-2 rounded-xl bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200 transition-colors"
               title="Audit Alerts & Notifications"
             >
               <Bell className="w-4 h-4" />
               {unreadNotifs > 0 && (
-                <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-rose-500 ring-2 ring-slate-900" />
+                <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-rose-500 ring-2 ring-white" />
               )}
             </Link>
 
@@ -205,12 +205,12 @@ export const AdminCommandLayout: React.FC = () => {
           </div>
 
           {/* Quick Authority Seal Card */}
-          <div className="p-4 rounded-2xl bg-linear-to-br from-purple-900 to-indigo-950 text-white shadow-sm space-y-2">
+          <div className="p-4 rounded-2xl bg-linear-to-br from-purple-50 to-indigo-50 text-slate-800 border border-purple-200/80 shadow-2xs space-y-2">
             <div className="flex items-center gap-2">
-              <Shield className="w-4 h-4 text-purple-400" />
-              <span className="text-xs font-black tracking-wide">IAS Apex Oversight</span>
+              <Shield className="w-4 h-4 text-purple-600" />
+              <span className="text-xs font-black tracking-wide text-purple-950">IAS Apex Oversight</span>
             </div>
-            <p className="text-[11px] text-purple-200 leading-relaxed">
+            <p className="text-[11px] text-slate-600 leading-relaxed">
               Executive authority mode. Changes to categories, departments, and user ACLs are logged under Public Records Act.
             </p>
           </div>

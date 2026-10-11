@@ -62,18 +62,18 @@ export const FieldInspectionPage: React.FC = () => {
               </div>
 
               {/* Camera viewfinder box */}
-              <div className="bg-slate-900 text-white rounded-2xl p-4 text-center relative overflow-hidden border border-slate-800">
-                <div className="absolute top-2 left-2 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded text-[9px] font-mono text-emerald-400 flex items-center gap-1">
-                  <MapPin className="w-2.5 h-2.5" /> 18.5314° N, 73.8446° E
+              <div className="bg-slate-100 text-slate-800 rounded-2xl p-4 text-center relative overflow-hidden border border-slate-200">
+                <div className="absolute top-2 left-2 bg-white/95 shadow-2xs backdrop-blur-md px-2 py-0.5 rounded text-[9px] font-mono text-emerald-700 border border-slate-200 flex items-center gap-1 font-bold">
+                  <MapPin className="w-2.5 h-2.5 text-emerald-600" /> 18.5314° N, 73.8446° E
                 </div>
 
                 <img
                   src="https://images.unsplash.com/photo-1584467735815-f778f274e296?auto=format&fit=crop&w=600&q=80"
                   alt="Inspection site"
-                  className="w-full h-44 object-cover rounded-xl mt-4 mb-3 border border-slate-700"
+                  className="w-full h-44 object-cover rounded-xl mt-4 mb-3 border border-slate-200"
                 />
 
-                <p className="text-[10px] text-slate-300">
+                <p className="text-[10px] text-slate-500 font-medium">
                   Site photo captured • Timestamp: {new Date().toLocaleTimeString()}
                 </p>
               </div>

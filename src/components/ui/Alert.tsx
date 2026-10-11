@@ -29,7 +29,7 @@ export const Alert: React.FC<AlertProps> = ({
     success: 'bg-emerald-50/90 border-emerald-200 text-emerald-950',
     warning: 'bg-amber-50/90 border-amber-200 text-amber-950',
     error: 'bg-rose-50/90 border-rose-200 text-rose-950',
-    gov: 'bg-slate-900 border-slate-700 text-white',
+    gov: 'bg-orange-50/90 border-orange-200 text-orange-950',
   };
 
   const defaultIcons = {
@@ -37,7 +37,7 @@ export const Alert: React.FC<AlertProps> = ({
     success: <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />,
     warning: <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0" />,
     error: <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />,
-    gov: <Shield className="w-5 h-5 text-orange-400 shrink-0" />,
+    gov: <Shield className="w-5 h-5 text-orange-600 shrink-0" />,
   };
 
   return (

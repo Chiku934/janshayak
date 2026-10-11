@@ -130,18 +130,18 @@ export const ClientDemoModal: React.FC<ClientDemoModalProps> = ({ isOpen, onClos
         </div>
 
         {/* Active Selected Scenario Detail Card */}
-        <div className="bg-linear-to-br from-slate-900 to-slate-950 text-white p-5 rounded-2xl border border-slate-800 space-y-4 shadow-md">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
+        <div className="bg-linear-to-br from-blue-50/70 via-indigo-50/40 to-slate-50 text-slate-800 p-5 rounded-2xl border border-blue-200/80 space-y-4 shadow-2xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-blue-100">
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-[10px] font-black uppercase tracking-wider bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded border border-blue-400/30">
+                <span className="text-[10px] font-black uppercase tracking-wider bg-blue-100 text-blue-700 px-2 py-0.5 rounded border border-blue-200">
                   Scenario 0{selectedScenario.number} Selected
                 </span>
-                <span className="text-xs font-bold text-slate-400">
+                <span className="text-xs font-bold text-slate-500">
                   {selectedScenario.subtitle}
                 </span>
               </div>
-              <h3 className="text-base sm:text-lg font-black text-white mt-1">
+              <h3 className="text-base sm:text-lg font-black text-slate-900 mt-1">
                 {selectedScenario.title}
               </h3>
             </div>
@@ -158,20 +158,20 @@ export const ClientDemoModal: React.FC<ClientDemoModalProps> = ({ isOpen, onClos
             </div>
           </div>
 
-          <p className="text-xs text-slate-300 leading-relaxed">
+          <p className="text-xs text-slate-600 leading-relaxed">
             {selectedScenario.description}
           </p>
 
           {/* Key Talking Points for Presenter */}
-          <div className="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700 space-y-2">
-            <span className="text-[10px] font-black uppercase tracking-wider text-blue-400 flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+          <div className="p-3.5 rounded-xl bg-white border border-blue-100 shadow-2xs space-y-2">
+            <span className="text-[10px] font-black uppercase tracking-wider text-blue-700 flex items-center gap-1">
+              <Sparkles className="w-3.5 h-3.5 text-blue-600" />
               <span>Key Presentation Talking Points</span>
             </span>
-            <ul className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs text-slate-300">
+            <ul className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs text-slate-700">
               {selectedScenario.keyTalkingPoints.map((tp, idx) => (
                 <li key={idx} className="flex items-start gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
                   <span className="text-[11px] leading-snug">{tp}</span>
                 </li>
               ))}

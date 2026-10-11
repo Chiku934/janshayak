@@ -91,14 +91,14 @@ export const ClientDemoToolbar: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setIsCollapsed(false)}
-                className="bg-slate-900/95 text-white text-xs font-bold px-3.5 py-2 rounded-full border border-slate-700 shadow-xl flex items-center gap-2 hover:bg-slate-800 transition-all cursor-pointer group hover:scale-105"
+                className="bg-white/95 text-slate-800 text-xs font-bold px-3.5 py-2 rounded-full border border-slate-200 shadow-xl flex items-center gap-2 hover:bg-slate-50 transition-all cursor-pointer group hover:scale-105"
                 title="Open Client Presentation Demo Controls"
               >
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-[11px] font-black uppercase tracking-wider text-blue-300">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-[11px] font-black uppercase tracking-wider text-blue-700">
                   Demo Hub
                 </span>
-                <ChevronUp className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-colors" />
+                <ChevronUp className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-700 transition-colors" />
               </button>
             </motion.div>
           ) : (
@@ -109,20 +109,20 @@ export const ClientDemoToolbar: React.FC = () => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 12, scale: 0.96 }}
               transition={{ duration: 0.18 }}
-              className="bg-slate-900/95 backdrop-blur-md text-white rounded-2xl border border-slate-700 shadow-2xl p-3.5 w-80 sm:w-96 space-y-3"
+              className="bg-white/95 backdrop-blur-md text-slate-800 rounded-2xl border border-slate-200 shadow-2xl p-3.5 w-80 sm:w-96 space-y-3"
             >
               {/* Header Bar */}
-              <div className="flex items-center justify-between pb-2.5 border-b border-slate-800 text-xs">
+              <div className="flex items-center justify-between pb-2.5 border-b border-slate-100 text-xs">
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="font-black tracking-tight text-white">Client Presentation Controls</span>
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="font-black tracking-tight text-slate-900">Client Presentation Controls</span>
                 </div>
 
                 <div className="flex items-center gap-1">
                   <button
                     type="button"
                     onClick={() => setIsCollapsed(true)}
-                    className="p-1 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
+                    className="p-1 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-100 transition-colors"
                     title="Minimize Demo Panel"
                   >
                     <ChevronDown className="w-4 h-4" />
@@ -132,10 +132,10 @@ export const ClientDemoToolbar: React.FC = () => {
 
               {/* Quick Role Switcher */}
               <div className="space-y-1.5">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
                   Switch Persona (Preserving Case Context)
                 </span>
-                <div className="grid grid-cols-3 gap-1 bg-slate-800/80 p-1 rounded-xl border border-slate-700/60">
+                <div className="grid grid-cols-3 gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200/80">
                   <button
                     type="button"
                     onClick={() => handleRoleSwitch('CITIZEN')}
@@ -143,7 +143,7 @@ export const ClientDemoToolbar: React.FC = () => {
                       'px-2 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer',
                       activeRole === 'CITIZEN'
                         ? 'bg-blue-600 text-white shadow-xs'
-                        : 'text-slate-300 hover:text-white hover:bg-slate-700/50'
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
                     )}
                   >
                     <User className="w-3 h-3" />
@@ -157,7 +157,7 @@ export const ClientDemoToolbar: React.FC = () => {
                       'px-2 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer',
                       activeRole === 'CASE_MANAGER'
                         ? 'bg-blue-600 text-white shadow-xs'
-                        : 'text-slate-300 hover:text-white hover:bg-slate-700/50'
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
                     )}
                   >
                     <Briefcase className="w-3 h-3" />
@@ -171,7 +171,7 @@ export const ClientDemoToolbar: React.FC = () => {
                       'px-2 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer',
                       activeRole === 'ADMIN'
                         ? 'bg-purple-600 text-white shadow-xs'
-                        : 'text-slate-300 hover:text-white hover:bg-slate-700/50'
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
                     )}
                   >
                     <Shield className="w-3 h-3" />
@@ -181,11 +181,11 @@ export const ClientDemoToolbar: React.FC = () => {
               </div>
 
               {/* Actions: Scenarios Launcher + Reset Demo */}
-              <div className="flex items-center gap-2 pt-1 border-t border-slate-800">
+              <div className="flex items-center gap-2 pt-1 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(true)}
-                  className="flex-1 bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold py-2 px-3 rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-xs cursor-pointer"
+                  className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold py-2 px-3 rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-xs cursor-pointer"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>5 Demo Scenarios</span>
@@ -194,10 +194,10 @@ export const ClientDemoToolbar: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="bg-slate-800 hover:bg-rose-950/40 text-slate-300 hover:text-rose-300 border border-slate-700 text-xs font-bold py-2 px-3 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer"
+                  className="bg-slate-50 hover:bg-rose-50 text-slate-600 hover:text-rose-700 border border-slate-200 hover:border-rose-200 text-xs font-bold py-2 px-3 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer"
                   title="Reset Demo Data to Initial State"
                 >
-                  <RotateCcw className={cn('w-3.5 h-3.5', resetFeedback && 'animate-spin text-emerald-400')} />
+                  <RotateCcw className={cn('w-3.5 h-3.5', resetFeedback && 'animate-spin text-emerald-600')} />
                   <span>{resetFeedback ? 'Reset!' : 'Reset'}</span>
                 </button>
               </div>

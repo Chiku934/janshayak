@@ -99,24 +99,24 @@ export const EvidenceVaultPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* DigiLocker Vault Banner */}
-      <div className="bg-linear-to-r from-blue-900 to-indigo-900 text-white rounded-2xl p-6 sm:p-8 shadow-md relative overflow-hidden">
+      <div className="bg-white text-slate-900 rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200/90 relative overflow-hidden bg-linear-to-r from-blue-50/60 via-indigo-50/30 to-slate-50">
         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="bg-white/10 text-blue-200 text-xs font-bold px-3 py-1 rounded-full border border-white/20 flex items-center gap-1.5">
-                <Lock className="w-3.5 h-3.5" />
+              <span className="bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full border border-blue-200 flex items-center gap-1.5">
+                <Lock className="w-3.5 h-3.5 text-blue-600" />
                 DigiLocker National Gateway
               </span>
-              <span className="bg-emerald-500/20 text-emerald-300 text-xs font-bold px-2.5 py-1 rounded-full border border-emerald-400/30 flex items-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5" />
+              <span className="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
                 Live Sync Active
               </span>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
               Citizen Digital Evidence Vault
             </h2>
-            <p className="text-xs sm:text-sm text-blue-200 max-w-xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 max-w-xl leading-relaxed">
               Legally recognized under IT Act 2000. Verified documents automatically attach to civic grievances, eliminating notarization and paper visits.
             </p>
           </div>
@@ -128,7 +128,7 @@ export const EvidenceVaultPage: React.FC = () => {
               onClick={handleManualSync}
               isLoading={isSyncing}
               leftIcon={<RefreshCw className="w-4 h-4" />}
-              className="bg-white/10 text-white border-white/20 hover:bg-white/20"
+              className="bg-white text-slate-700 border-slate-200 hover:bg-slate-50 shadow-2xs"
             >
               Sync DigiLocker
             </Button>

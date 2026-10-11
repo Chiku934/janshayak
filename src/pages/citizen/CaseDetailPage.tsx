@@ -602,13 +602,13 @@ export const CaseDetailPage: React.FC = () => {
           )}
 
           {/* District Helpline Help Card */}
-          <div className="p-4 bg-slate-900 text-white rounded-2xl text-xs space-y-2">
-            <h5 className="font-bold flex items-center gap-1.5">
-              <Phone className="w-3.5 h-3.5 text-blue-400" />
+          <div className="p-4 bg-blue-50 text-slate-800 rounded-2xl border border-blue-200/80 text-xs space-y-2">
+            <h5 className="font-bold flex items-center gap-1.5 text-blue-900">
+              <Phone className="w-3.5 h-3.5 text-blue-600" />
               <span>Need Immediate Voice Update?</span>
             </h5>
-            <p className="text-[11px] text-slate-400">
-              Call the 24x7 Civic Toll-Free Line <b>1800-11-2026</b> with Case ID <b>{caseItem.id}</b>.
+            <p className="text-[11px] text-slate-600">
+              Call the 24x7 Civic Toll-Free Line <b className="text-slate-800">1800-11-2026</b> with Case ID <b className="text-slate-800">{caseItem.id}</b>.
             </p>
           </div>
         </div>

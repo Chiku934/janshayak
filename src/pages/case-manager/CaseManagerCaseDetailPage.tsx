@@ -1067,7 +1067,7 @@ export const CaseManagerCaseDetailPage: React.FC = () => {
             <Button
               type="submit"
               size="sm"
-              className="font-bold bg-slate-900 hover:bg-black text-white"
+              className="font-bold bg-blue-600 hover:bg-blue-700 text-white"
             >
               Confirm Final Closure
             </Button>
