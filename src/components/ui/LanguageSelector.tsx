@@ -5,6 +5,7 @@ import { cn } from '../../utils/cn';
 
 const LANGUAGES: { code: SupportedLanguage; label: string; native: string }[] = [
   { code: 'en', label: 'English', native: 'English' },
+  { code: 'or', label: 'Odia', native: 'ଓଡ଼ିଆ' },
   { code: 'hi', label: 'Hindi', native: 'हिन्दी' },
   { code: 'mr', label: 'Marathi', native: 'मराठी' },
   { code: 'bn', label: 'Bengali', native: 'বাংলা' },
@@ -38,7 +39,7 @@ export const LanguageSelector: React.FC<{ compact?: boolean; className?: string 
           <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
           <div className="absolute right-0 mt-1.5 w-48 rounded-xl bg-white border border-slate-200 shadow-xl z-50 py-1 divide-y divide-slate-100 animate-in fade-in zoom-in-95">
             <div className="px-3 py-2 bg-slate-50 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-              Select Language (भाषा)
+              Select Language (ଭାଷା)
             </div>
             <div className="py-1">
               {LANGUAGES.map((lang) => {

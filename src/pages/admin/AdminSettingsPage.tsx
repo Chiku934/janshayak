@@ -145,7 +145,7 @@ export const AdminSettingsPage: React.FC = () => {
 
             <div className="p-3 bg-purple-50 rounded-xl border border-purple-200 text-[11px] text-purple-900 leading-relaxed">
               <span className="font-bold block mb-0.5">Bhashini Multilingual Speech Engine Active</span>
-              Automatic real-time translation enabled for Hindi, Marathi, Bengali, Tamil, Telugu, and Gujarati.
+              Automatic real-time translation enabled for Odia, Hindi, Marathi, Bengali, Tamil, Telugu, and Gujarati.
             </div>
           </div>
         </Card>

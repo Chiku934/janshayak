@@ -144,7 +144,7 @@ export const NewGrievancePage: React.FC = () => {
       <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-xl font-bold text-slate-900 tracking-tight">
-            Lodge Public Grievance (शिकायत दर्ज करें)
+            Lodge Public Grievance (ଅଭିଯୋଗ ଦାଖଲ କରନ୍ତୁ)
           </h2>
           <p className="text-xs text-slate-500 mt-1">
             Backed by statutory Public Service Delivery SLAs and official DigiLocker authentication.
@@ -170,7 +170,7 @@ export const NewGrievancePage: React.FC = () => {
             }}
             leftIcon={<Mic className="w-3.5 h-3.5" />}
           >
-            Voice Sahayak (बोलें)
+            Voice Sahayak (ସ୍ୱର ସହାୟକ)
           </Button>
         </div>
       </div>
@@ -203,7 +203,7 @@ export const NewGrievancePage: React.FC = () => {
                     Prefer Speaking in your Mother Tongue?
                   </h4>
                   <p className="text-[11px] text-orange-800 mt-0.5">
-                    Speak in Hindi, Marathi, Bengali, Tamil, Telugu or Gujarati. AI will automatically transcribe and fill this form.
+                    Speak in Odia, Hindi, Marathi, Bengali, Tamil, Telugu or Gujarati. AI will automatically transcribe and fill this form.
                   </p>
                 </div>
               </div>

@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 
 const INDIAN_STATES = [
+  'Odisha',
   'Maharashtra',
   'Uttar Pradesh',
   'Rajasthan',
@@ -34,6 +35,7 @@ const INDIAN_STATES = [
 ];
 
 const DISTRICT_MAP: Record<string, string[]> = {
+  Odisha: ['Bhubaneswar / Khordha', 'Cuttack', 'Sundargarh / Rourkela', 'Puri', 'Sambalpur', 'Balasore', 'Berhampur / Ganjam'],
   Maharashtra: ['Pune District', 'Mumbai City', 'Nagpur', 'Thane', 'Nashik', 'Aurangabad'],
   'Uttar Pradesh': ['Lucknow', 'Kanpur', 'Varanasi', 'Noida', 'Agra', 'Prayagraj'],
   Rajasthan: ['Jaipur', 'Jodhpur', 'Kota', 'Udaipur', 'Bikaner', 'Ajmer'],
@@ -47,6 +49,7 @@ const DISTRICT_MAP: Record<string, string[]> = {
 
 const LANGUAGE_OPTIONS: { value: SupportedLanguage; label: string }[] = [
   { value: 'en', label: 'English (Indian Standard)' },
+  { value: 'or', label: 'Odia (ଓଡ଼ିଆ)' },
   { value: 'hi', label: 'Hindi (हिन्दी)' },
   { value: 'mr', label: 'Marathi (मराठी)' },
   { value: 'bn', label: 'Bengali (বাংলা)' },
@@ -124,7 +127,7 @@ export const CitizenProfileSetupPage: React.FC = () => {
           <div className="flex items-center justify-between pb-3 mb-5 border-b border-slate-100">
             <span className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
               <User className="w-3.5 h-3.5 text-blue-600" />
-              <span>Personal Details (नागरिक विवरण)</span>
+              <span>Personal Details (ନାଗରିକ ବିବରଣୀ)</span>
             </span>
 
             <Button
@@ -141,7 +144,7 @@ export const CitizenProfileSetupPage: React.FC = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Full Name */}
             <Input
-              label="Citizen Full Name (पूरा नाम)"
+              label="Citizen Full Name (ପୂରା ନାମ)"
               placeholder="e.g. Rameshwar Patil"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -151,7 +154,7 @@ export const CitizenProfileSetupPage: React.FC = () => {
             {/* Preferred Language */}
             <div>
               <Select
-                label="Preferred Language (भाषा का चयन)"
+                label="Preferred Language (ପସନ୍ଦର ଭାଷା)"
                 options={LANGUAGE_OPTIONS}
                 value={selectedLang}
                 onChange={(e) => setSelectedLang(e.target.value as SupportedLanguage)}
@@ -164,14 +167,14 @@ export const CitizenProfileSetupPage: React.FC = () => {
             {/* State & District Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               <Select
-                label="State / UT (राज्य)"
+                label="State / UT (ରାଜ୍ୟ)"
                 options={INDIAN_STATES}
                 value={state}
                 onChange={(e) => handleStateChange(e.target.value)}
               />
 
               <Select
-                label="District (ज़िला)"
+                label="District (ଜିଲ୍ଲା)"
                 options={districts}
                 value={district}
                 onChange={(e) => setDistrict(e.target.value)}
@@ -182,7 +185,7 @@ export const CitizenProfileSetupPage: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div className="sm:col-span-2">
                 <Input
-                  label="Municipal Ward / Panchayat (वार्ड)"
+                  label="Municipal Ward / Panchayat (ୱାର୍ଡ / ପଞ୍ଚାୟତ)"
                   placeholder="e.g. Ward 14 (Shivaji Nagar)"
                   value={locality}
                   onChange={(e) => setLocality(e.target.value)}
@@ -193,7 +196,7 @@ export const CitizenProfileSetupPage: React.FC = () => {
 
               <div>
                 <Input
-                  label="Pincode (पिन कोड)"
+                  label="Pincode (ପିନ୍ କୋଡ୍)"
                   placeholder="411016"
                   maxLength={6}
                   value={pincode}
@@ -205,7 +208,7 @@ export const CitizenProfileSetupPage: React.FC = () => {
 
             {/* Street Address */}
             <Input
-              label="Street Address / Landmark (पता)"
+              label="Street Address / Landmark (ଠିକଣା / ଲ୍ୟାଣ୍ଡମାର୍କ)"
               placeholder="Plot/Flat number, road or landmark"
               value={streetAddress}
               onChange={(e) => setStreetAddress(e.target.value)}

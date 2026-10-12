@@ -243,7 +243,7 @@ export const DesignSystemShowcase: React.FC = () => {
                 onChange={(e) => setCheckboxChecked(e.target.checked)}
               />
               <Switch
-                label="Send SMS alerts in Hindi (हिन्दी)"
+                label="Send SMS alerts in Odia (ଓଡ଼ିଆ)"
                 checked={switchChecked}
                 onChange={(e) => setSwitchChecked(e.target.checked)}
               />

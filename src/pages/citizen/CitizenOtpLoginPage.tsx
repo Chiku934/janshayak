@@ -154,7 +154,7 @@ export const CitizenOtpLoginPage: React.FC = () => {
             <form onSubmit={handleSendOtp} className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                  Indian Mobile Number (मोबाइल नंबर)
+                  Indian Mobile Number (ମୋବାଇଲ୍ ନମ୍ବର)
                 </label>
                 <div className="relative flex items-center">
                   <span className="absolute left-3 text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded border border-slate-200 pointer-events-none">

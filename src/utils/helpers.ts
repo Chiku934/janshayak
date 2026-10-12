@@ -12,7 +12,7 @@ export function getStatusConfig(status: CaseStatusType): {
     case 'SUBMITTED':
       return {
         label: 'Grievance Submitted',
-        labelHi: 'शिकायत दर्ज',
+        labelHi: 'ଅଭିଯୋଗ ଦାଖଲ',
         bg: 'bg-blue-50',
         text: 'text-blue-700',
         border: 'border-blue-200',
@@ -22,7 +22,7 @@ export function getStatusConfig(status: CaseStatusType): {
     case 'TRIAGED':
       return {
         label: 'Triaged',
-        labelHi: 'एआई द्वारा वर्गीकृत',
+        labelHi: 'AI ଦ୍ୱାରା ବର୍ଗୀକୃତ',
         bg: 'bg-indigo-50',
         text: 'text-indigo-700',
         border: 'border-indigo-200',
@@ -31,7 +31,7 @@ export function getStatusConfig(status: CaseStatusType): {
     case 'VERIFIED':
       return {
         label: 'Verified',
-        labelHi: 'सत्यापित',
+        labelHi: 'ଯାଞ୍ଚ ହୋଇଛି',
         bg: 'bg-teal-50',
         text: 'text-teal-700',
         border: 'border-teal-200',
@@ -40,7 +40,7 @@ export function getStatusConfig(status: CaseStatusType): {
     case 'ASSIGNED':
       return {
         label: 'Assigned',
-        labelHi: 'अधिकारी नियुक्त',
+        labelHi: 'ଅଧିକାରୀ ନିଯୁକ୍ତ',
         bg: 'bg-purple-50',
         text: 'text-purple-700',
         border: 'border-purple-200',
@@ -49,7 +49,7 @@ export function getStatusConfig(status: CaseStatusType): {
     case 'UNDER_INVESTIGATION':
       return {
         label: 'Under Review',
-        labelHi: 'समीक्षाधीन',
+        labelHi: 'ସମୀକ୍ଷାଧୀନ',
         bg: 'bg-amber-50',
         text: 'text-amber-700',
         border: 'border-amber-200',
@@ -58,7 +58,7 @@ export function getStatusConfig(status: CaseStatusType): {
     case 'FIELD_INSPECTION':
       return {
         label: 'Field Inspection',
-        labelHi: 'मौके पर निरीक्षण',
+        labelHi: 'ଘଟଣାସ୍ଥଳ ପରିଦର୍ଶନ',
         bg: 'bg-orange-50',
         text: 'text-orange-700',
         border: 'border-orange-200',
@@ -67,7 +67,7 @@ export function getStatusConfig(status: CaseStatusType): {
     case 'ACTION_IN_PROGRESS':
       return {
         label: 'Action in Progress',
-        labelHi: 'समाधान प्रगति पर',
+        labelHi: 'ସମାଧାନ ପ୍ରଗତିରେ',
         bg: 'bg-cyan-50',
         text: 'text-cyan-700',
         border: 'border-cyan-200',
@@ -76,7 +76,7 @@ export function getStatusConfig(status: CaseStatusType): {
     case 'RESPONSE':
       return {
         label: 'Response',
-        labelHi: 'विभागीय उत्तर',
+        labelHi: 'ବିଭାଗୀୟ ଉତ୍ତର',
         bg: 'bg-blue-50',
         text: 'text-blue-700',
         border: 'border-blue-200',
@@ -85,7 +85,7 @@ export function getStatusConfig(status: CaseStatusType): {
     case 'RESOLVED':
       return {
         label: 'Resolved',
-        labelHi: 'समाधान पूर्ण',
+        labelHi: 'ସମାଧାନ ସମ୍ପୂର୍ଣ୍ଣ',
         bg: 'bg-emerald-50',
         text: 'text-emerald-700',
         border: 'border-emerald-200',
@@ -94,7 +94,7 @@ export function getStatusConfig(status: CaseStatusType): {
     case 'CLOSED':
       return {
         label: 'Closed',
-        labelHi: 'बंद',
+        labelHi: 'ବନ୍ଦ',
         bg: 'bg-slate-100',
         text: 'text-slate-700',
         border: 'border-slate-300',
@@ -103,7 +103,7 @@ export function getStatusConfig(status: CaseStatusType): {
     case 'ESCALATED':
       return {
         label: 'Escalated to Collectorate',
-        labelHi: 'कलेक्टर कार्यालय को प्रेषित',
+        labelHi: 'ଜିଲ୍ଲାପାଳଙ୍କ କାର୍ଯ୍ୟାଳୟକୁ ପ୍ରେରିତ',
         bg: 'bg-rose-50',
         text: 'text-rose-700',
         border: 'border-rose-200',
@@ -112,7 +112,7 @@ export function getStatusConfig(status: CaseStatusType): {
     case 'REJECTED':
       return {
         label: 'Rejected / Invalid',
-        labelHi: 'अस्वीकृत / अमान्य',
+        labelHi: 'ପ୍ରତ୍ୟାଖ୍ୟାତ / ଅମାନ୍ୟ',
         bg: 'bg-slate-100',
         text: 'text-slate-700',
         border: 'border-slate-300',

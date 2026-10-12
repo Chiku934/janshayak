@@ -81,7 +81,7 @@ export const OfficerCaseDetailPage: React.FC = () => {
               <span className="font-mono text-sm font-extrabold text-blue-700 bg-blue-50 px-2.5 py-1 rounded border border-blue-200">
                 {caseItem.id}
               </span>
-              <StatusBadge status={caseItem.status} hindiSubtext />
+              <StatusBadge status={caseItem.status} odiaSubtext />
               <span className={`text-xs px-2.5 py-1 rounded-full font-bold border ${priorityConfig.badge}`}>
                 {priorityConfig.label}
               </span>

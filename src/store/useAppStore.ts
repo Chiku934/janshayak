@@ -11,7 +11,7 @@ import { WELFARE_SCHEMES } from '../mock/schemesData';
 import { MOCK_USERS } from '../mock/officersData';
 import { INITIAL_NOTIFICATIONS } from '../mock/notificationsData';
 
-export type SupportedLanguage = 'en' | 'hi' | 'mr' | 'bn' | 'ta' | 'te' | 'gu';
+export type SupportedLanguage = 'en' | 'hi' | 'mr' | 'bn' | 'ta' | 'te' | 'gu' | 'or';
 
 const generateBlockHash = () => {
   const hex = Math.random().toString(16).slice(2, 10) + Math.random().toString(16).slice(2, 10);

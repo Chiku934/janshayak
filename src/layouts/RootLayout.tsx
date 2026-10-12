@@ -64,7 +64,7 @@ export const RootLayout: React.FC = () => {
                       JAN SAHAYAK
                     </span>
                     <span className="hidden sm:inline-block text-xs font-semibold text-orange-600 bg-orange-50 px-1.5 py-0.5 rounded border border-orange-200">
-                      जन सहायक
+                      ଜନ ସହାୟକ
                     </span>
                   </div>
                   <p className="text-[10px] text-slate-500 font-medium hidden md:block">
@@ -286,7 +286,7 @@ export const RootLayout: React.FC = () => {
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
                 <GovEmblem size="sm" />
-                <span>JAN SAHAYAK (जन सहायक)</span>
+                <span>JAN SAHAYAK (ଜନ ସହାୟକ)</span>
               </div>
               <p className="text-[11px] text-slate-500">
                 National Unified Civic Assistance Platform. Powered by AI-driven triage, multi-channel citizen communication & DigiLocker integration.

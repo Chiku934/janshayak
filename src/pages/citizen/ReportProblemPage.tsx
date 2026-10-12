@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '../../store/useAppStore';
 import { useVoiceStore } from '../../store/useVoiceStore';
@@ -7,6 +7,8 @@ import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import { Textarea } from '../../components/ui/Textarea';
 import { Stepper } from '../../components/ui/Stepper';
+import { Modal } from '../../components/ui/Modal';
+import { DigiLockerSyncModal } from '../../features/evidence/DigiLockerSyncModal';
 import { CaseEvidence, DepartmentType, CasePriority } from '../../types/case';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -39,6 +41,8 @@ import {
   Home,
   Clock,
   Check,
+  Download,
+  ExternalLink,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { cn } from '../../utils/cn';
@@ -48,7 +52,7 @@ const CATEGORIES = [
   {
     id: 'GOVT_SERVICE',
     name: 'Government Service',
-    nameHi: 'सरकारी सेवा',
+    nameHi: 'ସରକାରୀ ସେବା',
     icon: Landmark,
     color: 'blue',
     department: 'Social Welfare & Pensions' as DepartmentType,
@@ -58,7 +62,7 @@ const CATEGORIES = [
   {
     id: 'CIVIC_ISSUE',
     name: 'Local / Civic Issue',
-    nameHi: 'स्थानीय / नागरिक समस्या',
+    nameHi: 'ସ୍ଥାନୀୟ / ନାଗରିକ ସମସ୍ୟା',
     icon: Building2,
     color: 'purple',
     department: 'Urban Development & Housing (PMAY)' as DepartmentType,
@@ -68,7 +72,7 @@ const CATEGORIES = [
   {
     id: 'ROADS_SANITATION',
     name: 'Roads & Sanitation',
-    nameHi: 'सड़कें एवं स्वच्छता',
+    nameHi: 'ରାସ୍ତାଘାଟ ଓ ପରିମଳ',
     icon: Truck,
     color: 'amber',
     department: 'Public Works & Roads (PWD)' as DepartmentType,
@@ -78,7 +82,7 @@ const CATEGORIES = [
   {
     id: 'WATER_ELECTRICITY',
     name: 'Water & Electricity',
-    nameHi: 'जल एवं विद्युत आपूर्ति',
+    nameHi: 'ଜଳ ଓ ବିଦ୍ୟୁତ୍ ଯୋଗାଣ',
     icon: Zap,
     color: 'cyan',
     department: 'Municipal Water Supply & Sanitation' as DepartmentType,
@@ -88,7 +92,7 @@ const CATEGORIES = [
   {
     id: 'OTHER',
     name: 'Other',
-    nameHi: 'अन्य शिकायतें',
+    nameHi: 'ଅନ୍ୟାନ୍ୟ ଅଭିଯୋଗ',
     icon: HelpCircle,
     color: 'emerald',
     department: 'Public Health & Family Welfare' as DepartmentType,
@@ -134,7 +138,7 @@ export const ReportProblemPage: React.FC = () => {
   const [isGpsLoading, setIsGpsLoading] = useState(false);
   const [mapZoom, setMapZoom] = useState(15);
 
-  // STEP 4: Evidence
+  // STEP 4: Evidence & Real Document Upload States
   const [evidenceList, setEvidenceList] = useState<CaseEvidence[]>([
     {
       id: 'ev-preset-1',
@@ -164,6 +168,115 @@ export const ReportProblemPage: React.FC = () => {
     },
   ]);
 
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  const docInputRef = useRef<HTMLInputElement>(null);
+  const [isDraggingImage, setIsDraggingImage] = useState(false);
+  const [isDraggingDoc, setIsDraggingDoc] = useState(false);
+  const [previewItem, setPreviewItem] = useState<CaseEvidence | null>(null);
+  const [isDigiLockerOpen, setIsDigiLockerOpen] = useState(false);
+  const [uploadFeedback, setUploadFeedback] = useState<string | null>(null);
+
+  const formatFileSize = (bytes: number): string => {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  };
+
+  const handleFileUpload = (files: FileList | null, forceType?: 'IMAGE' | 'PDF') => {
+    if (!files || files.length === 0) return;
+
+    const newItems: CaseEvidence[] = [];
+    Array.from(files).forEach((file) => {
+      const isImg = file.type.startsWith('image/');
+      const detectedType: CaseEvidence['type'] = forceType || (isImg ? 'IMAGE' : 'PDF');
+      const objectUrl = isImg ? URL.createObjectURL(file) : '#';
+
+      newItems.push({
+        id: `ev-real-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+        name: file.name,
+        type: detectedType,
+        url: objectUrl,
+        size: formatFileSize(file.size),
+        uploadedAt: new Date().toISOString(),
+        verified: true,
+        metadata: {
+          geoTag: `${coordinates.lat.toFixed(4)}° N, ${coordinates.lng.toFixed(4)}° E`,
+          timestamp: new Date().toLocaleString(),
+        },
+      });
+    });
+
+    setEvidenceList((prev) => [...prev, ...newItems]);
+    setUploadFeedback(`Successfully attached ${files.length} real document${files.length > 1 ? 's' : ''}`);
+    setTimeout(() => setUploadFeedback(null), 3500);
+  };
+
+  const handleClearAllEvidence = () => {
+    setEvidenceList([]);
+  };
+
+  const handleLoadSampleEvidence = () => {
+    setEvidenceList([
+      {
+        id: 'ev-preset-1',
+        name: 'broken_pipeline_ground_photo.jpg',
+        type: 'IMAGE',
+        url: 'https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?w=600&auto=format&fit=crop&q=80',
+        size: '2.4 MB',
+        uploadedAt: new Date().toISOString(),
+        verified: true,
+        metadata: {
+          geoTag: '18.5204° N, 73.8567° E',
+          timestamp: new Date().toISOString(),
+        },
+      },
+      {
+        id: 'ev-preset-2',
+        name: 'aadhaar_ekyc_verified.pdf',
+        type: 'DIGILOCKER_CERT',
+        url: '#',
+        size: '180 KB',
+        uploadedAt: new Date().toISOString(),
+        verified: true,
+        metadata: {
+          digiLockerDocId: 'UIDAI-EKYC-8812',
+          issuer: 'UIDAI National Gateway',
+        },
+      },
+    ]);
+  };
+
+  const handleDigiLockerImport = (docNames: string[]) => {
+    const digiDocs: CaseEvidence[] = docNames.map((name, idx) => ({
+      id: `ev-digi-${Date.now()}-${idx}`,
+      name: `${name.toLowerCase().replace(/[^a-z0-9]/g, '_')}.pdf`,
+      type: 'DIGILOCKER_CERT',
+      url: '#',
+      size: '220 KB',
+      uploadedAt: new Date().toISOString(),
+      verified: true,
+      metadata: {
+        digiLockerDocId: `UIDAI-VERIFIED-${Math.floor(1000 + Math.random() * 9000)}`,
+        issuer: 'DigiLocker National Cloud Gateway',
+      },
+    }));
+    setEvidenceList((prev) => [...prev, ...digiDocs]);
+    setUploadFeedback(`Imported ${docNames.length} verified document(s) from DigiLocker`);
+    setTimeout(() => setUploadFeedback(null), 3500);
+  };
+
+  const handleAddSampleImage = () => {
+    imageInputRef.current?.click();
+  };
+
+  const handleAddSampleDoc = () => {
+    docInputRef.current?.click();
+  };
+
+  const handleRemoveEvidence = (id: string) => {
+    setEvidenceList(evidenceList.filter((e) => e.id !== id));
+  };
+
   const selectedCategoryObj =
     CATEGORIES.find((c) => c.id === selectedCategory) || CATEGORIES[0];
 
@@ -185,49 +298,15 @@ export const ReportProblemPage: React.FC = () => {
       setIsRecording(false);
     } else {
       setIsRecording(true);
-      setVoiceTranscript('Listening... Speak now in Hindi or English');
+      setVoiceTranscript('Listening... Speak now in Odia or English');
       setTimeout(() => {
         const sampleText =
-          ' मुख्य पानी की पाइपलाइन फूट गई है और सड़क पर पानी बह रहा है। कृपया तत्काल मरम्मत करवाएं। (Main water pipeline has ruptured and road is flooded. Please dispatch repair team immediately.)';
+          ' ମୁଖ୍ୟ ପାଣି ପାଇପଲାଇନ ଫାଟିଯାଇଛି ଏବଂ ରାସ୍ତାରେ ପାଣି ଭାସୁଛି। ଦୟାକରି ତୁରନ୍ତ ମରାମତି କରାନ୍ତୁ। (Main water pipeline has ruptured and road is flooded. Please dispatch repair team immediately.)';
         setDescription((prev) => (prev ? prev + '\n' + sampleText : sampleText));
         setIsRecording(false);
         setVoiceTranscript('');
       }, 2500);
     }
-  };
-
-  // Helper to add mock evidence
-  const handleAddSampleImage = () => {
-    const newEv: CaseEvidence = {
-      id: `ev-img-${Date.now()}`,
-      name: `site_inspection_photo_${evidenceList.length + 1}.jpg`,
-      type: 'IMAGE',
-      url: 'https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?w=600&auto=format&fit=crop&q=80',
-      size: '1.8 MB',
-      uploadedAt: new Date().toISOString(),
-      verified: true,
-      metadata: {
-        geoTag: `${coordinates.lat.toFixed(4)}° N, ${coordinates.lng.toFixed(4)}° E`,
-      },
-    };
-    setEvidenceList([...evidenceList, newEv]);
-  };
-
-  const handleAddSampleDoc = () => {
-    const newDoc: CaseEvidence = {
-      id: `ev-doc-${Date.now()}`,
-      name: `society_resolution_petition.pdf`,
-      type: 'PDF',
-      url: '#',
-      size: '340 KB',
-      uploadedAt: new Date().toISOString(),
-      verified: true,
-    };
-    setEvidenceList([...evidenceList, newDoc]);
-  };
-
-  const handleRemoveEvidence = (id: string) => {
-    setEvidenceList(evidenceList.filter((e) => e.id !== id));
   };
 
   // Handle Submission
@@ -393,7 +472,7 @@ export const ReportProblemPage: React.FC = () => {
           leftIcon={<Mic className="w-3.5 h-3.5" />}
           className="font-bold shrink-0 shadow-xs"
         >
-          बोलकर दर्ज करें (Voice AI)
+          କହିକି ଦାଖଲ କରନ୍ତୁ (Voice AI)
         </Button>
       </div>
 
@@ -562,7 +641,7 @@ export const ReportProblemPage: React.FC = () => {
 
               {/* Problem Title Input */}
               <Input
-                label="Problem Title / Short Summary (समस्या का संक्षिप्त शीर्षक)"
+                label="Problem Title / Short Summary (ସମସ୍ୟାର ସଂକ୍ଷିପ୍ତ ଶୀର୍ଷକ)"
                 placeholder="e.g. Drinking Water Pipeline Burst & Flooding"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -573,7 +652,7 @@ export const ReportProblemPage: React.FC = () => {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <label className="block text-xs font-semibold text-slate-700">
-                    Detailed Description (विस्तृत विवरण)
+                    Detailed Description (ବିସ୍ତୃତ ବିବରଣୀ)
                   </label>
 
                   {/* Voice input button */}
@@ -595,7 +674,7 @@ export const ReportProblemPage: React.FC = () => {
                     ) : (
                       <>
                         <Mic className="w-3.5 h-3.5 text-orange-600" />
-                        <span>Speak to Dictate (बोलकर लिखें)</span>
+                        <span>Speak to Dictate (କହିକି ଲେଖନ୍ତୁ)</span>
                       </>
                     )}
                   </button>
@@ -851,7 +930,7 @@ export const ReportProblemPage: React.FC = () => {
               {/* Address Form Inputs */}
               <div className="space-y-4">
                 <Input
-                  label="Exact Street Address / Landmark (स्थान एवं लैंडमार्क)"
+                  label="Exact Street Address / Landmark (ସ୍ଥାନ ଓ ଲ୍ୟାଣ୍ଡମାର୍କ)"
                   placeholder="e.g. Plot 42, Near Datta Mandir, Shivaji Nagar Lane 4"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
@@ -860,19 +939,19 @@ export const ReportProblemPage: React.FC = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <Input
-                    label="Municipal Ward (वार्ड)"
+                    label="Municipal Ward (ୱାର୍ଡ)"
                     value={ward}
                     onChange={(e) => setWard(e.target.value)}
                     required
                   />
                   <Input
-                    label="City / District (शहर)"
+                    label="City / District (ସହର / ଜିଲ୍ଲା)"
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                     required
                   />
                   <Input
-                    label="Pincode (पिन कोड)"
+                    label="Pincode (ପିନ୍ କୋଡ୍)"
                     value={pincode}
                     maxLength={6}
                     onChange={(e) => setPincode(e.target.value.replace(/\D/g, ''))}
@@ -907,7 +986,7 @@ export const ReportProblemPage: React.FC = () => {
           )}
 
           {/* =========================================================
-              STEP 4: Upload Evidence
+              STEP 4: Upload Evidence & Documents
              ========================================================= */}
           {currentStep === 4 && (
             <motion.div
@@ -918,121 +997,277 @@ export const ReportProblemPage: React.FC = () => {
               transition={{ duration: 0.2 }}
               className="space-y-6"
             >
-              <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              {/* Hidden file inputs for real documents and photos */}
+              <input
+                ref={imageInputRef}
+                type="file"
+                accept="image/*,video/*"
+                multiple
+                className="hidden"
+                onChange={(e) => {
+                  handleFileUpload(e.target.files, 'IMAGE');
+                  e.target.value = '';
+                }}
+              />
+              <input
+                ref={docInputRef}
+                type="file"
+                accept=".pdf,.doc,.docx,.xls,.xlsx,.txt,application/pdf"
+                multiple
+                className="hidden"
+                onChange={(e) => {
+                  handleFileUpload(e.target.files, 'PDF');
+                  e.target.value = '';
+                }}
+              />
+
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-3">
                 <div>
                   <h3 className="text-base font-bold text-slate-900">
-                    STEP 4: Upload Evidence
+                    STEP 4: Upload Evidence & Documents
                   </h3>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    Attach site photographs, video clips, or official PDF petitions (Frontend Only).
+                    Attach real site photographs, camera shots, or official PDF petitions from your device or DigiLocker.
                   </p>
                 </div>
-                <span className="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200">
-                  Step 4 of 5
-                </span>
+                
+                <div className="flex items-center gap-2">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setIsDigiLockerOpen(true)}
+                    leftIcon={<Lock className="w-3.5 h-3.5 text-blue-600" />}
+                    className="text-xs text-blue-700 bg-blue-50/70 border-blue-200 hover:bg-blue-100 font-semibold h-8"
+                  >
+                    Fetch from DigiLocker
+                  </Button>
+                  <span className="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200">
+                    Step 4 of 5
+                  </span>
+                </div>
               </div>
+
+              {/* Upload Success Banner */}
+              <AnimatePresence>
+                {uploadFeedback && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    className="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs font-semibold text-emerald-800 flex items-center justify-between gap-2 shadow-xs"
+                  >
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                      <span>{uploadFeedback}</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setUploadFeedback(null)}
+                      className="text-emerald-700 hover:text-emerald-900 text-xs font-bold"
+                    >
+                      Dismiss
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               {/* Upload Selection Action Boxes */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {/* Image Selection */}
+                {/* Real Image / Photo Upload Box */}
                 <div
-                  onClick={handleAddSampleImage}
-                  className="p-5 rounded-2xl border-2 border-dashed border-blue-300 bg-blue-50/40 hover:bg-blue-50 hover:border-blue-500 transition-all cursor-pointer flex flex-col items-center text-center group"
+                  onClick={() => imageInputRef.current?.click()}
+                  onDragOver={(e) => {
+                    e.preventDefault();
+                    setIsDraggingImage(true);
+                  }}
+                  onDragLeave={() => setIsDraggingImage(false)}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    setIsDraggingImage(false);
+                    handleFileUpload(e.dataTransfer.files, 'IMAGE');
+                  }}
+                  className={cn(
+                    'p-6 rounded-2xl border-2 border-dashed transition-all cursor-pointer flex flex-col items-center text-center group relative',
+                    isDraggingImage
+                      ? 'border-blue-600 bg-blue-100/60 ring-4 ring-blue-100'
+                      : 'border-blue-300 bg-blue-50/40 hover:bg-blue-50 hover:border-blue-500'
+                  )}
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center mb-3 group-hover:scale-105 transition-transform shadow-sm">
-                    <ImageIcon className="w-6 h-6" />
+                  <div className="w-14 h-14 rounded-2xl bg-blue-600 text-white flex items-center justify-center mb-3 group-hover:scale-105 transition-transform shadow-sm">
+                    <ImageIcon className="w-7 h-7" />
                   </div>
                   <h4 className="text-sm font-bold text-slate-900">
-                    + Add Site Photo / Image
+                    + Upload Real Site Photo / Image
                   </h4>
-                  <p className="text-xs text-slate-500 mt-1">
-                    JPEG, PNG, HEIC from camera or gallery
+                  <p className="text-xs text-slate-500 mt-1 max-w-xs">
+                    Click to browse your device or drag & drop JPEG, PNG, WebP, HEIC from camera or gallery
                   </p>
-                  <span className="mt-3 text-xs text-blue-700 font-bold bg-white px-3 py-1 rounded-md border border-blue-200">
-                    Add Photo Evidence
-                  </span>
+                  <div className="mt-4 flex items-center gap-2">
+                    <span className="text-xs text-blue-700 font-bold bg-white px-3.5 py-1.5 rounded-lg border border-blue-200 shadow-2xs group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                      Choose Photo from Device
+                    </span>
+                  </div>
                 </div>
 
-                {/* Document Selection */}
+                {/* Real Document / PDF Upload Box */}
                 <div
-                  onClick={handleAddSampleDoc}
-                  className="p-5 rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50/40 hover:bg-slate-50 hover:border-slate-400 transition-all cursor-pointer flex flex-col items-center text-center group"
+                  onClick={() => docInputRef.current?.click()}
+                  onDragOver={(e) => {
+                    e.preventDefault();
+                    setIsDraggingDoc(true);
+                  }}
+                  onDragLeave={() => setIsDraggingDoc(false)}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    setIsDraggingDoc(false);
+                    handleFileUpload(e.dataTransfer.files, 'PDF');
+                  }}
+                  className={cn(
+                    'p-6 rounded-2xl border-2 border-dashed transition-all cursor-pointer flex flex-col items-center text-center group relative',
+                    isDraggingDoc
+                      ? 'border-indigo-600 bg-indigo-100/60 ring-4 ring-indigo-100'
+                      : 'border-slate-300 bg-slate-50/40 hover:bg-slate-50 hover:border-slate-400'
+                  )}
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-slate-700 text-white flex items-center justify-center mb-3 group-hover:scale-105 transition-transform shadow-sm">
-                    <FileText className="w-6 h-6" />
+                  <div className="w-14 h-14 rounded-2xl bg-slate-800 text-white flex items-center justify-center mb-3 group-hover:scale-105 transition-transform shadow-sm">
+                    <FileText className="w-7 h-7" />
                   </div>
                   <h4 className="text-sm font-bold text-slate-900">
-                    + Add PDF / Document
+                    + Upload Real PDF / Document
                   </h4>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Panchayat letters, receipts, DigiLocker records
+                  <p className="text-xs text-slate-500 mt-1 max-w-xs">
+                    Click to browse or drag & drop official PDF petitions, village letters, receipts, affidavits
                   </p>
-                  <span className="mt-3 text-xs text-slate-700 font-bold bg-white px-3 py-1 rounded-md border border-slate-200">
-                    Add Document Evidence
-                  </span>
+                  <div className="mt-4 flex items-center gap-2">
+                    <span className="text-xs text-slate-700 font-bold bg-white px-3.5 py-1.5 rounded-lg border border-slate-200 shadow-2xs group-hover:bg-slate-800 group-hover:text-white transition-colors">
+                      Choose Document from Device
+                    </span>
+                  </div>
                 </div>
               </div>
 
               {/* Attached Evidence List & Previews */}
               <div className="space-y-3 pt-2">
                 <div className="flex items-center justify-between">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                    Attached Files ({evidenceList.length})
-                  </h4>
-                  <span className="text-[11px] text-emerald-700 font-semibold flex items-center gap-1">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                    Encrypted Local Storage
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700">
+                      Attached Files ({evidenceList.length})
+                    </h4>
+                    {evidenceList.length > 0 && (
+                      <button
+                        type="button"
+                        onClick={handleClearAllEvidence}
+                        className="text-[11px] font-semibold text-rose-600 hover:text-rose-800 hover:underline cursor-pointer"
+                      >
+                        Clear All
+                      </button>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-3">
+                    {evidenceList.length === 0 && (
+                      <button
+                        type="button"
+                        onClick={handleLoadSampleEvidence}
+                        className="text-[11px] font-semibold text-blue-600 hover:underline cursor-pointer"
+                      >
+                        Load Demo Samples
+                      </button>
+                    )}
+                    <span className="text-[11px] text-emerald-700 font-semibold flex items-center gap-1">
+                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                      Encrypted Local Storage
+                    </span>
+                  </div>
                 </div>
 
                 {evidenceList.length === 0 ? (
-                  <div className="p-8 text-center bg-slate-50 rounded-2xl border border-slate-200 text-slate-400 text-xs">
-                    No attachments added yet. Click an option above to attach photos or documents.
+                  <div className="p-8 text-center bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 text-slate-500 text-xs space-y-2">
+                    <Upload className="w-8 h-8 text-slate-400 mx-auto mb-1 opacity-70" />
+                    <p className="font-semibold text-slate-700">No documents or photos attached yet</p>
+                    <p className="text-[11px] text-slate-400">Click the upload cards above or drag files directly from your computer to attach your real files.</p>
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {evidenceList.map((ev) => (
                       <div
                         key={ev.id}
-                        className="p-3.5 bg-white rounded-xl border border-slate-200 shadow-2xs flex items-center justify-between gap-3 group hover:border-blue-400 transition-colors"
+                        className="p-3.5 bg-white rounded-xl border border-slate-200 shadow-2xs flex items-center justify-between gap-3 group hover:border-blue-400 hover:shadow-xs transition-all"
                       >
-                        <div className="flex items-center gap-3 truncate">
+                        <div
+                          className="flex items-center gap-3 truncate cursor-pointer flex-1"
+                          onClick={() => setPreviewItem(ev)}
+                          title="Click to preview"
+                        >
                           {ev.type === 'IMAGE' ? (
-                            <img
-                              src={ev.url}
-                              alt={ev.name}
-                              className="w-12 h-12 rounded-lg object-cover border border-slate-200 shrink-0"
-                            />
+                            <div className="relative shrink-0">
+                              <img
+                                src={ev.url}
+                                alt={ev.name}
+                                className="w-12 h-12 rounded-lg object-cover border border-slate-200 bg-slate-100"
+                                onError={(e) => {
+                                  (e.target as HTMLElement).style.display = 'none';
+                                }}
+                              />
+                            </div>
                           ) : (
-                            <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 flex items-center justify-center shrink-0">
-                              <FileText className="w-6 h-6" />
+                            <div className={cn(
+                              "w-12 h-12 rounded-lg border flex items-center justify-center shrink-0",
+                              ev.type === 'DIGILOCKER_CERT'
+                                ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                                : "bg-blue-50 text-blue-700 border-blue-200"
+                            )}>
+                              {ev.type === 'DIGILOCKER_CERT' ? (
+                                <Lock className="w-6 h-6" />
+                              ) : (
+                                <FileText className="w-6 h-6" />
+                              )}
                             </div>
                           )}
 
                           <div className="truncate">
-                            <p className="text-xs font-bold text-slate-900 truncate">
+                            <p className="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition-colors">
                               {ev.name}
                             </p>
                             <p className="text-[10px] text-slate-400 mt-0.5">
                               {ev.size} • {ev.type}
                             </p>
-                            {ev.metadata?.geoTag && (
-                              <span className="inline-block text-[9px] font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200 mt-0.5">
-                                Geotagged
-                              </span>
-                            )}
+                            <div className="flex items-center gap-1 mt-0.5">
+                              {ev.type === 'DIGILOCKER_CERT' && (
+                                <span className="inline-block text-[9px] font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">
+                                  DigiLocker Verified
+                                </span>
+                              )}
+                              {ev.metadata?.geoTag && (
+                                <span className="inline-block text-[9px] font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">
+                                  Geotagged
+                                </span>
+                              )}
+                            </div>
                           </div>
                         </div>
 
-                        {/* Remove attachment button */}
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveEvidence(ev.id)}
-                          aria-label="Remove attachment"
-                          className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer shrink-0"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
+                        {/* Actions */}
+                        <div className="flex items-center gap-1 shrink-0">
+                          <button
+                            type="button"
+                            onClick={() => setPreviewItem(ev)}
+                            title="Preview file"
+                            aria-label="Preview file"
+                            className="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors cursor-pointer"
+                          >
+                            <Eye className="w-4 h-4" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveEvidence(ev.id)}
+                            title="Remove attachment"
+                            aria-label="Remove attachment"
+                            className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -1128,7 +1363,7 @@ export const ReportProblemPage: React.FC = () => {
                 {/* Citizen Details */}
                 <div className="pt-3 border-t border-slate-200">
                   <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-2">
-                    Complainant Information (नागरिक विवरण)
+                    Complainant Information (ନାଗରିକ ବିବରଣୀ)
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 bg-white p-3 rounded-xl border border-slate-200 text-xs">
                     <div>
@@ -1206,6 +1441,107 @@ export const ReportProblemPage: React.FC = () => {
           )}
         </AnimatePresence>
       </Card>
+
+      {/* DigiLocker Sync Modal */}
+      <DigiLockerSyncModal
+        isOpen={isDigiLockerOpen}
+        onClose={() => setIsDigiLockerOpen(false)}
+        onDocsImported={handleDigiLockerImport}
+      />
+
+      {/* Real Document / Photo Preview Modal */}
+      <Modal
+        isOpen={!!previewItem}
+        onClose={() => setPreviewItem(null)}
+        title={
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
+              {previewItem?.type === 'IMAGE' ? (
+                <ImageIcon className="w-4 h-4" />
+              ) : (
+                <FileText className="w-4 h-4" />
+              )}
+            </div>
+            <div className="truncate">
+              <h4 className="text-sm font-bold text-slate-900 truncate">{previewItem?.name}</h4>
+              <p className="text-[10px] text-slate-400">{previewItem?.size} • {previewItem?.type}</p>
+            </div>
+          </div>
+        }
+        size="lg"
+      >
+        {previewItem && (
+          <div className="space-y-4">
+            {previewItem.type === 'IMAGE' ? (
+              <div className="rounded-xl overflow-hidden border border-slate-200 bg-slate-950 flex items-center justify-center max-h-[440px]">
+                <img
+                  src={previewItem.url}
+                  alt={previewItem.name}
+                  className="max-h-[440px] w-auto object-contain"
+                />
+              </div>
+            ) : (
+              <div className="p-8 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-4">
+                <div className="w-16 h-16 rounded-2xl bg-blue-100 text-blue-700 mx-auto flex items-center justify-center shadow-xs">
+                  <FileText className="w-8 h-8" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 text-base">{previewItem.name}</h4>
+                  <p className="text-xs text-slate-500 mt-1">Official Document Attachment ({previewItem.size})</p>
+                </div>
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-800 text-xs font-semibold border border-emerald-200">
+                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                  <span>Tamper-Proof DigiLocker / Local Cryptographic Integrity Verified</span>
+                </div>
+              </div>
+            )}
+
+            {/* Document Metadata Details */}
+            <div className="grid grid-cols-2 gap-3 p-3.5 bg-slate-50 rounded-xl text-xs border border-slate-200">
+              <div>
+                <span className="text-slate-400 font-medium">Uploaded At:</span>
+                <p className="font-bold text-slate-800 mt-0.5">
+                  {new Date(previewItem.uploadedAt).toLocaleString()}
+                </p>
+              </div>
+              <div>
+                <span className="text-slate-400 font-medium">Verification Status:</span>
+                <p className="font-bold text-emerald-700 mt-0.5 flex items-center gap-1">
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  Verified Attachment
+                </p>
+              </div>
+              {previewItem.metadata?.geoTag && (
+                <div className="col-span-2 pt-2 border-t border-slate-200">
+                  <span className="text-slate-400 font-medium">GPS Coordinates / Geotag:</span>
+                  <p className="font-bold text-slate-800 mt-0.5 flex items-center gap-1">
+                    <MapPin className="w-3.5 h-3.5 text-blue-600" />
+                    {previewItem.metadata.geoTag}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            <div className="flex justify-end gap-2 pt-2 border-t border-slate-100">
+              <Button variant="outline" size="sm" onClick={() => setPreviewItem(null)}>
+                Close Preview
+              </Button>
+              {previewItem.url && previewItem.url !== '#' && (
+                <a
+                  href={previewItem.url}
+                  download={previewItem.name}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Download / Open File</span>
+                </a>
+              )}
+            </div>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 };

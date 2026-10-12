@@ -19,7 +19,7 @@ export interface UserProfile {
     state: string;
     pincode: string;
   };
-  language: 'en' | 'hi' | 'mr' | 'bn' | 'ta' | 'te' | 'gu';
+  language: 'en' | 'hi' | 'mr' | 'bn' | 'ta' | 'te' | 'gu' | 'or';
   incomeCategory?: 'BPL' | 'EWS' | 'LIG' | 'MIG' | 'GENERAL';
   occupation?: string;
   familyMembersCount?: number;

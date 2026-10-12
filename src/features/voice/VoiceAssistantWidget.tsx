@@ -35,7 +35,7 @@ export const VoiceAssistantWidget: React.FC = () => {
           </div>
           <div>
             <h3 className="text-base font-bold text-slate-900 leading-tight">
-              Jan Sahayak AI Voice Assistant (जन सहायक)
+              Jan Sahayak AI Voice Assistant (ଜନ ସହାୟକ)
             </h3>
             <p className="text-[11px] text-slate-500 font-normal">
               Voice-First Multilingual Civic Redressal & Scheme Engine
@@ -55,6 +55,7 @@ export const VoiceAssistantWidget: React.FC = () => {
               onChange={(e) => setLanguage(e.target.value as any)}
               className="px-2 py-1 bg-slate-100 border border-slate-200 rounded-md text-xs font-bold text-blue-900 focus:outline-none"
             >
+              <option value="or-IN">Odia (ଓଡ଼ିଆ)</option>
               <option value="hi-IN">Hindi (हिन्दी)</option>
               <option value="mr-IN">Marathi (मराठी)</option>
               <option value="en-IN">English (India)</option>

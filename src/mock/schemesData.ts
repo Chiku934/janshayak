@@ -4,7 +4,7 @@ export const WELFARE_SCHEMES: WelfareScheme[] = [
   {
     id: 'SCH-01',
     name: 'Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)',
-    nameHi: 'प्रधानमंत्री किसान सम्मान निधि',
+    nameHi: 'ପ୍ରଧାନମନ୍ତ୍ରୀ କିଷାନ ସମ୍ମାନ ନିଧି',
     code: 'PM-KISAN-2026',
     category: 'FARMERS',
     department: 'Ministry of Agriculture & Farmers Welfare',
@@ -28,7 +28,7 @@ export const WELFARE_SCHEMES: WelfareScheme[] = [
   {
     id: 'SCH-02',
     name: 'Ayushman Bharat PM-JAY (Health Protection Cover)',
-    nameHi: 'आयुष्मान भारत प्रधानमंत्री जन आरोग्य योजना',
+    nameHi: 'ଆୟୁଷ୍ମାନ ଭାରତ ପ୍ରଧାନମନ୍ତ୍ରୀ ଜନ ଆରୋଗ୍ୟ ଯୋଜନା',
     code: 'PM-JAY-2026',
     category: 'HEALTH',
     department: 'National Health Authority (NHA)',
@@ -51,7 +51,7 @@ export const WELFARE_SCHEMES: WelfareScheme[] = [
   {
     id: 'SCH-03',
     name: 'Pradhan Mantri Awas Yojana (PMAY-G / PMAY-U)',
-    nameHi: 'प्रधानमंत्री आवास योजना (ग्रामीण / शहरी)',
+    nameHi: 'ପ୍ରଧାନମନ୍ତ୍ରୀ ଆବାସ ଯୋଜନା (ଗ୍ରାମୀଣ / ସହରାଞ୍ଚଳ)',
     code: 'PMAY-HOUSING-2026',
     category: 'HOUSING',
     department: 'Ministry of Housing and Urban Affairs / MoRD',
@@ -76,7 +76,7 @@ export const WELFARE_SCHEMES: WelfareScheme[] = [
   {
     id: 'SCH-04',
     name: 'Indira Gandhi National Old Age Pension Scheme (IGNOAPS)',
-    nameHi: 'इंदिरा गांधी राष्ट्रीय वृद्धावस्था पेंशन योजना',
+    nameHi: 'ଇନ୍ଦିରା ଗାନ୍ଧୀ ଜାତୀୟ ବାର୍ଦ୍ଧକ୍ୟ ପେନସନ ଯୋଜନା',
     code: 'IGNOAPS-2026',
     category: 'PENSION',
     department: 'Department of Social Justice and Empowerment',
@@ -100,7 +100,7 @@ export const WELFARE_SCHEMES: WelfareScheme[] = [
   {
     id: 'SCH-05',
     name: 'PM SVANidhi (Street Vendor Micro-Credit Loan)',
-    nameHi: 'पीएम स्वनिधि (स्ट्रीट वेंडर्स आत्मनिर्भर निधि)',
+    nameHi: 'ପିଏମ୍ ସ୍ୱନିଧି (ଷ୍ଟ୍ରିଟ୍ ଭେଣ୍ଡର ଆତ୍ମନିର୍ଭର ନିଧି)',
     code: 'PM-SVANIDHI-2026',
     category: 'EMPLOYMENT',
     department: 'Ministry of Housing and Urban Affairs',
@@ -123,7 +123,7 @@ export const WELFARE_SCHEMES: WelfareScheme[] = [
   {
     id: 'SCH-06',
     name: 'Sukanya Samriddhi Yojana (SSY)',
-    nameHi: 'सुकन्या समृद्धि योजना (बेटी बचाओ बेटी पढ़ाओ)',
+    nameHi: 'ସୁକନ୍ୟା ସମୃଦ୍ଧି ଯୋଜନା (ଝିଅ ବଞ୍ଚାଅ ଝିଅ ପଢ଼ାଅ)',
     code: 'SSY-GIRL-2026',
     category: 'WOMEN_CHILD',
     department: 'Ministry of Finance (Small Savings)',

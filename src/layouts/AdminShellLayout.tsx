@@ -228,7 +228,7 @@ export const AdminShellLayout: React.FC = () => {
 
               <div>
                 <div className="flex items-center gap-1.5 leading-tight">
-                  <span className="font-bold text-xs text-orange-600">जन सहायक</span>
+                  <span className="font-bold text-xs text-orange-600">ଜନ ସହାୟକ</span>
                 </div>
                 <h1 className="font-extrabold text-sm tracking-tight text-slate-900 leading-tight">
                   Jan Sahayak

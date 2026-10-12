@@ -91,11 +91,11 @@ export const VoiceReportingPage: React.FC = () => {
     'IDLE' | 'RECORDING' | 'TRANSCRIBING' | 'REVIEW' | 'SUCCESS'
   >('IDLE');
 
-  const [selectedLang, setSelectedLang] = useState<SupportedVoiceLang>('English');
+  const [selectedLang, setSelectedLang] = useState<SupportedVoiceLang>('Odia');
   const [recordingSeconds, setRecordingSeconds] = useState(0);
 
   // Review & Edit form state
-  const [transcript, setTranscript] = useState(VOICE_LANG_PRESETS.English.transcript);
+  const [transcript, setTranscript] = useState(VOICE_LANG_PRESETS.Odia.transcript);
   const [category, setCategory] = useState(VOICE_LANG_PRESETS.English.category);
   const [location, setLocation] = useState(
     'Near Main Road Water Pipeline Junction, Shivaji Nagar, Ward 14, Pune - 411016'
@@ -552,7 +552,7 @@ export const VoiceReportingPage: React.FC = () => {
                 <div className="flex items-center justify-between">
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
                     <Edit3 className="w-3.5 h-3.5 text-blue-600" />
-                    <span>Editable Transcript (ट्रांसक्रिप्ट संपादित करें)</span>
+                    <span>Editable Transcript (ଟ୍ରାନ୍ସକ୍ରିପ୍ଟ ସମ୍ପାଦନ କରନ୍ତୁ)</span>
                   </label>
                   <span className="text-[11px] text-slate-400">
                     You can edit the text directly if needed
@@ -574,7 +574,7 @@ export const VoiceReportingPage: React.FC = () => {
                   <div className="flex items-center gap-2">
                     <Zap className="w-4 h-4 text-blue-600" />
                     <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                      Suggested Category (स्वचालित रूप से वर्गीकृत):
+                      Suggested Category (ସ୍ୱୟଂଚାଳିତ ଭାବେ ବର୍ଗୀକୃତ):
                     </span>
                   </div>
 

@@ -79,7 +79,7 @@ export const CitizenHomePage: React.FC = () => {
                 JAN SAHAYAK
               </span>
               <span className="text-[10px] font-bold text-orange-700 bg-orange-50 px-2 py-0.5 rounded-md border border-orange-200/80">
-                जन सहायक
+                ଜନ ସହାୟକ
               </span>
             </div>
             <p className="text-[11px] text-slate-500 font-medium hidden sm:block">
@@ -185,7 +185,7 @@ export const CitizenHomePage: React.FC = () => {
                 leftIcon={<Mic className="w-5 h-5 text-white animate-pulse" />}
                 className="font-black text-sm shadow-md py-3.5 px-5 justify-center"
               >
-                बोलकर शिकायत करें (Voice AI)
+                ସ୍ୱର ମାଧ୍ୟମରେ ଅଭିଯୋଗ କରନ୍ତୁ (Voice AI)
               </Button>
 
               <Button

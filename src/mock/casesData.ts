@@ -190,7 +190,7 @@ export const INITIAL_CASES: CaseItem[] = [
         timestamp: new Date(Date.now() - 1000 * 60 * 60 * 12).toISOString(),
         actor: { name: 'State Treasury Gateway', role: 'Finance Department' },
         status: 'ACTION_IN_PROGRESS',
-        comment: 'Beneficiary notified via Hindi SMS alert. SMS ref: JS-SMS-99381.',
+        comment: 'Beneficiary notified via Odia SMS alert. SMS ref: JS-SMS-99381.',
       },
     ],
     aiAnalysis: {
@@ -203,7 +203,7 @@ export const INITIAL_CASES: CaseItem[] = [
       suggestedResolutionWorkflow: [
         'Validate Bank KYC & IFSC in Treasury Portal',
         'Release 3-month backlog arrears via PFMS',
-        'Send confirmation audio call in Hindi to beneficiary',
+        'Send confirmation audio call in Odia to beneficiary',
       ],
     },
     tags: ['Old Age Pension', 'Social Security', 'Direct Benefit Transfer', 'DigiLocker Verified'],

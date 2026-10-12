@@ -39,7 +39,7 @@ const INITIAL_PERMISSIONS: PermissionRule[] = [
     id: 'perm-2',
     name: 'Voice-Enabled AI Intake',
     category: 'Citizen Redressal',
-    description: 'Use audio dictation and automated Marathi/Hindi transcription tools.',
+    description: 'Use audio dictation and automated Odia/Hindi transcription tools.',
     citizen: true,
     caseManager: true,
     admin: true,

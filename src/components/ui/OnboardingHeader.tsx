@@ -15,9 +15,9 @@ export const OnboardingHeader: React.FC<OnboardingHeaderProps> = ({
   subtitle,
 }) => {
   const steps = [
-    { num: 1, label: 'OTP Verification', labelHi: 'मोबाइल सत्यापन' },
-    { num: 2, label: 'Citizen Profile', labelHi: 'नागरिक प्रोफ़ाइल' },
-    { num: 3, label: 'Consent & Privacy', labelHi: 'सहमति एवं गोपनीयता' },
+    { num: 1, label: 'OTP Verification', labelHi: 'ମୋବାଇଲ୍ ଯାଞ୍ଚ' },
+    { num: 2, label: 'Citizen Profile', labelHi: 'ନାଗରିକ ପ୍ରୋଫାଇଲ୍' },
+    { num: 3, label: 'Consent & Privacy', labelHi: 'ସମ୍ମତି ଓ ଗୋପନୀୟତା' },
   ];
 
   return (
@@ -27,7 +27,7 @@ export const OnboardingHeader: React.FC<OnboardingHeaderProps> = ({
         <GovEmblem size="md" />
         <div>
           <span className="text-sm font-extrabold text-blue-950 tracking-tight">
-            JAN SAHAYAK • जन सहायक
+            JAN SAHAYAK • ଜନ ସହାୟକ
           </span>
           <p className="text-[10px] text-slate-500 font-medium">
             National Citizen Onboarding & Authentication Gateway

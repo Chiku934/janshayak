@@ -8,6 +8,7 @@ interface StatusBadgeProps {
   showDot?: boolean;
   className?: string;
   hindiSubtext?: boolean;
+  odiaSubtext?: boolean;
 }
 
 export const StatusBadge: React.FC<StatusBadgeProps> = ({
@@ -15,8 +16,10 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
   showDot = true,
   className,
   hindiSubtext = false,
+  odiaSubtext,
 }) => {
   const config = getStatusConfig(status);
+  const showVernacular = odiaSubtext ?? hindiSubtext;
 
   return (
     <span
@@ -30,7 +33,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
     >
       {showDot && <span className={cn('w-2 h-2 rounded-full shrink-0', config.dot)} />}
       <span>{config.label}</span>
-      {hindiSubtext && (
+      {showVernacular && (
         <span className="opacity-75 text-[10px] font-normal ml-1">({config.labelHi})</span>
       )}
     </span>

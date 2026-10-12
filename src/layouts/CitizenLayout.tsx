@@ -51,7 +51,7 @@ export const CitizenLayout: React.FC = () => {
           className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-orange-50 hover:bg-orange-100 text-orange-700 text-xs font-bold border border-orange-200 transition-colors ml-2 shrink-0 cursor-pointer"
         >
           <Mic className="w-3.5 h-3.5 animate-pulse text-orange-600" />
-          <span>बोलकर शिकायत दर्ज करें (Voice AI)</span>
+          <span>ସ୍ୱର ମାଧ୍ୟମରେ ଅଭିଯୋଗ କରନ୍ତୁ (Voice AI)</span>
         </button>
       </div>
 
